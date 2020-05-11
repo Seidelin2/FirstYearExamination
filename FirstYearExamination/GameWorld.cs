@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FirstYearExamination.Builder;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace FirstYearExamination
 {
@@ -9,14 +11,39 @@ namespace FirstYearExamination
     /// </summary>
     public class GameWorld : Game
     {
-        GraphicsDeviceManager graphics;
+		#region INSTANCE
+		private static GameWorld instance;
+
+		public static GameWorld Instance
+		{
+			get
+			{
+				if(instance == null)
+				{
+					instance = new GameWorld();
+				}
+				return instance;
+			}
+		}
+		#endregion
+
+		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+		private List<GameObject> gameObjects = new List<GameObject>();
+
+		//Resolution
+		public static Vector2 screenSize;
 
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-        }
+
+			graphics.PreferredBackBufferWidth = 1024;
+			graphics.PreferredBackBufferHeight = 768;
+			screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+		}
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -26,9 +53,19 @@ namespace FirstYearExamination
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+			// TODO: Add your initialization logic here
+			IsMouseVisible = true;
 
-            base.Initialize();
+			Director director = new Director(new PlayerBuilder());
+
+			gameObjects.Add(director.Construct());
+
+			for (int i = 0; i < gameObjects.Count; i++)
+			{
+				gameObjects[i].Awake();
+			}
+
+			base.Initialize();
         }
 
         /// <summary>
@@ -40,8 +77,13 @@ namespace FirstYearExamination
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-        }
+			for (int i = 0; i < gameObjects.Count; i++)
+			{
+				gameObjects[i].Start();
+			}
+
+			// TODO: use this.Content to load your game content here
+		}
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -62,9 +104,13 @@ namespace FirstYearExamination
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+			// TODO: Add your update logic here
+			for (int i = 0; i < gameObjects.Count; i++)
+			{
+				gameObjects[i].Update(gameTime);
+			}
 
-            base.Update(gameTime);
+			base.Update(gameTime);
         }
 
         /// <summary>
@@ -75,9 +121,17 @@ namespace FirstYearExamination
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+			// TODO: Add your drawing code here
+			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-            base.Draw(gameTime);
+			for (int i = 0; i < gameObjects.Count; i++)
+			{
+				gameObjects[i].Draw(spriteBatch);
+			}
+
+			spriteBatch.End();
+
+			base.Draw(gameTime);
         }
     }
 }
