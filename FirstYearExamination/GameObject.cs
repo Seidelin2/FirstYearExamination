@@ -70,5 +70,15 @@ namespace FirstYearExamination
 				}
 			}
 		}
+
+		public void Destroy()
+		{
+			foreach (Component component in components.Values)
+			{
+				component.Destroy();
+			}
+
+			GameWorld.Instance.RemoveGameObject(this);
+		}
 	}
 }

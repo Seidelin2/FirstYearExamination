@@ -32,5 +32,10 @@ namespace FirstYearExamination.Components
 		{
 
 		}
+
+		public virtual void Destroy()
+		{
+
+		}
 	}
 }
