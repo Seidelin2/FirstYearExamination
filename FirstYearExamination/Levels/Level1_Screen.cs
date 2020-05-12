@@ -13,7 +13,7 @@ namespace FirstYearExamination.Levels
     {
 
         private Texture2D background;
-        private string path = "Sprites/TestPixel";
+        private string path = "Sprites/Map/Map_3";
 
 
         public Level1_Screen()
@@ -23,6 +23,9 @@ namespace FirstYearExamination.Levels
 
         public override void LoadContent()
         {
+            //Set mouse cursor to visible.
+            ScreenManager.IsMouseVisible = true;
+
             base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
         }
@@ -41,6 +44,7 @@ namespace FirstYearExamination.Levels
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
         }
     }

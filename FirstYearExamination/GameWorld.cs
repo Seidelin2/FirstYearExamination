@@ -54,10 +54,10 @@ namespace FirstYearExamination
 		/// </summary>
 		protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
-			IsMouseVisible = true;
+            // TODO: Add your initialization logic here
+            IsMouseVisible = true;
 
-			Director director = new Director(new PlayerBuilder());
+            Director director = new Director(new PlayerBuilder());
 
             graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Screens
 {
-    abstract class GameScreen : Game
+    abstract class GameScreen
     {
         //Local ContentManager, unique to each GameScreen object, that handles its content.
         protected ContentManager gameScreenContent;
