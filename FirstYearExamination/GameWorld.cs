@@ -1,4 +1,5 @@
 ﻿using FirstYearExamination.Builder;
+using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -33,11 +34,8 @@ namespace FirstYearExamination
         Texture2D texture;
         List<Panel> Panels;
 
-
         private List<GameObject> gameObjects = new List<GameObject>();
-
-		//Resolution
-		public static Vector2 screenSize;
+		public List<Collider> Colliders { get; set; } = new List<Collider>();
 
         public GameWorld()
         {
@@ -46,23 +44,15 @@ namespace FirstYearExamination
 
             Panels = new List<Panel>();
             PanelDrawing();
+		}
 
-
-
-
-
-            //graphics.PreferredBackBufferWidth = 1024;
-            //graphics.PreferredBackBufferHeight = 768;
-            //screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-        }
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize()
+		/// <summary>
+		/// Allows the game to perform any initialization it needs to before starting to run.
+		/// This is where it can query for any required services and load any non-graphic
+		/// related content.  Calling base.Initialize will enumerate through any components
+		/// and initialize them as well.
+		/// </summary>
+		protected override void Initialize()
         {
 			// TODO: Add your initialization logic here
 			IsMouseVisible = true;
@@ -74,7 +64,6 @@ namespace FirstYearExamination
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             ScreenManager.Initialize();
-
 
             gameObjects.Add(director.Construct());
 
@@ -133,7 +122,6 @@ namespace FirstYearExamination
                 Exit();
             ScreenManager.Update(gameTime);
 
-
             // TODO: Add your update logic here
             for (int i = 0; i < gameObjects.Count; i++)
 			{
@@ -156,18 +144,15 @@ namespace FirstYearExamination
 
             ScreenManager.Draw(spriteBatch);
 
-
             for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Draw(spriteBatch);
 			}
 
-
             foreach (var panel in Panels)
             {
                 panel.Draw(spriteBatch);
             }
-
 
             spriteBatch.End();
 
@@ -184,8 +169,8 @@ namespace FirstYearExamination
                     var panel1 = new Panel()
                     {
                         //Size of the Panels
-                        Dimensions = new Vector2(100, 100),
-                        Position = new Vector2(10 + j * 110, 10 + i * 110),
+                        Dimensions = new Vector2(64, 64),
+                        Position = new Vector2(10 + j * 72, 10 + i * 72),
                         Color = Color.Black,
                     };
 
@@ -193,5 +178,24 @@ namespace FirstYearExamination
                 }
             }
         }
-    }
+
+		public void AddGameObject(GameObject go)
+		{
+			go.Awake();
+			go.Start();
+			gameObjects.Add(go);
+
+			Collider c = (Collider)go.GetComponent("Collider");
+
+			if (c != null)
+			{
+				Colliders.Add(c);
+			}
+		}
+
+		public void RemoveGameObject(GameObject go)
+		{
+			gameObjects.Remove(go);
+		}
+	}
 }
