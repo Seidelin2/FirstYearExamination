@@ -49,7 +49,8 @@
     <Compile Include="Components\Player.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
-    <Compile Include="Gui\Panel.cs" />
+    <Compile Include="GUI\GUIButtons.cs" />
+    <Compile Include="GUI\Panel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Levels\Level1_Screen.cs" />
     <Compile Include="Program.cs" />
