@@ -18,7 +18,7 @@ namespace FirstYearExamination.Levels
 
         public Level1_Screen()
         {
-
+            
         }
 
         public override void LoadContent()
@@ -35,6 +35,7 @@ namespace FirstYearExamination.Levels
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            
 
         }
 
