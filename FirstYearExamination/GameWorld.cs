@@ -1,4 +1,5 @@
 ﻿using FirstYearExamination.Builder;
+using FirstYearExamination.Gui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,8 +30,11 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D texture;
+        List<Panel> Panels;
 
-		private List<GameObject> gameObjects = new List<GameObject>();
+
+        private List<GameObject> gameObjects = new List<GameObject>();
 
 		//Resolution
 		public static Vector2 screenSize;
@@ -40,10 +44,17 @@ namespace FirstYearExamination
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-			graphics.PreferredBackBufferWidth = 1024;
-			graphics.PreferredBackBufferHeight = 768;
-			screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-		}
+            Panels = new List<Panel>();
+            PanelDrawing();
+
+
+
+
+
+            //graphics.PreferredBackBufferWidth = 1024;
+            //graphics.PreferredBackBufferHeight = 768;
+            //screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+        }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -58,7 +69,14 @@ namespace FirstYearExamination
 
 			Director director = new Director(new PlayerBuilder());
 
-			gameObjects.Add(director.Construct());
+            graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
+            graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
+            ScreenManager.Initialize();
+
+
+            gameObjects.Add(director.Construct());
 
 			for (int i = 0; i < gameObjects.Count; i++)
 			{
@@ -76,8 +94,16 @@ namespace FirstYearExamination
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            texture = Helper.CreateTexture(GraphicsDevice, 100, 100, (x) => Color.Black);
 
-			for (int i = 0; i < gameObjects.Count; i++)
+            ScreenManager.LoadContent(Content);
+
+            foreach (var panel in Panels)
+            {
+                panel.LoadContent(GraphicsDevice);
+            }
+
+            for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Start();
 			}
@@ -92,6 +118,8 @@ namespace FirstYearExamination
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            ScreenManager.UnloadContent();
+
         }
 
         /// <summary>
@@ -103,9 +131,11 @@ namespace FirstYearExamination
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            ScreenManager.Update(gameTime);
 
-			// TODO: Add your update logic here
-			for (int i = 0; i < gameObjects.Count; i++)
+
+            // TODO: Add your update logic here
+            for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Update(gameTime);
 			}
@@ -124,14 +154,44 @@ namespace FirstYearExamination
 			// TODO: Add your drawing code here
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-			for (int i = 0; i < gameObjects.Count; i++)
+            ScreenManager.Draw(spriteBatch);
+
+
+            for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Draw(spriteBatch);
 			}
 
-			spriteBatch.End();
+
+            foreach (var panel in Panels)
+            {
+                panel.Draw(spriteBatch);
+            }
+
+
+            spriteBatch.End();
 
 			base.Draw(gameTime);
+        }
+
+        public void PanelDrawing()
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    // outer panels
+                    var panel1 = new Panel()
+                    {
+                        //Size of the Panels
+                        Dimensions = new Vector2(100, 100),
+                        Position = new Vector2(10 + j * 110, 10 + i * 110),
+                        Color = Color.Black,
+                    };
+
+                    Panels.Add(panel1);
+                }
+            }
         }
     }
 }
