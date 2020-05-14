@@ -1,6 +1,7 @@
 ﻿using FirstYearExamination.Builder;
 using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
+using FirstYearExamination.ObjectPool;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -36,6 +37,10 @@ namespace FirstYearExamination
 
         private List<GameObject> gameObjects = new List<GameObject>();
 		public List<Collider> Colliders { get; set; } = new List<Collider>();
+
+		public static float DeltaTime { get; set; }
+		private float unitSpawnTime;
+		private float UnitCoolDown = 1;
 
         public GameWorld()
         {
@@ -120,6 +125,8 @@ namespace FirstYearExamination
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+			DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             ScreenManager.Update(gameTime);
 
             // TODO: Add your update logic here
@@ -127,6 +134,8 @@ namespace FirstYearExamination
 			{
 				gameObjects[i].Update(gameTime);
 			}
+
+			SpawnUnit();
 
 			base.Update(gameTime);
         }
@@ -196,6 +205,20 @@ namespace FirstYearExamination
 		public void RemoveGameObject(GameObject go)
 		{
 			gameObjects.Remove(go);
+		}
+
+		private void SpawnUnit()
+		{
+			unitSpawnTime += DeltaTime;
+
+			if(unitSpawnTime >= UnitCoolDown)
+			{
+				GameObject go = UnitPool.Instance.GetObject();
+				go.Transform.Position = new Vector2(-64, 64);
+				AddGameObject(go);
+
+				unitSpawnTime = 0;
+			}
 		}
 	}
 }
