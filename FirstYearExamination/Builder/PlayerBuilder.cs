@@ -20,6 +20,8 @@ namespace FirstYearExamination.Builder
 			SpriteRenderer sr = new SpriteRenderer("Sprites/TestPixel");
 
 			go.AddComponent(sr);
+			go.AddComponent(new Collider(sr, player));
+			GameWorld.Instance.Colliders.Add((Collider)go.GetComponent("Collider"));
 		}
 
 		public GameObject GetResult()

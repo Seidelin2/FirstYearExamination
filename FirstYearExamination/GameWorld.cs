@@ -1,5 +1,7 @@
 ﻿using FirstYearExamination.Builder;
+using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
+using FirstYearExamination.ObjectPool;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -30,51 +32,42 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D texture;
-        List<Panel> Panels;
 
 
         private List<GameObject> gameObjects = new List<GameObject>();
+		public List<Collider> Colliders { get; set; } = new List<Collider>();
 
-		//Resolution
-		public static Vector2 screenSize;
+		public static float DeltaTime { get; set; }
+		private float unitSpawnTime;
+		private float UnitCoolDown = 1;
 
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            Panels = new List<Panel>();
-            PanelDrawing();
 
+		}
 
-
-
-
-            //graphics.PreferredBackBufferWidth = 1024;
-            //graphics.PreferredBackBufferHeight = 768;
-            //screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-        }
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize()
+		/// <summary>
+		/// Allows the game to perform any initialization it needs to before starting to run.
+		/// This is where it can query for any required services and load any non-graphic
+		/// related content.  Calling base.Initialize will enumerate through any components
+		/// and initialize them as well.
+		/// </summary>
+		protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
-			IsMouseVisible = true;
+            // TODO: Add your initialization logic here
+            IsMouseVisible = true;
 
-			Director director = new Director(new PlayerBuilder());
-
+            Director director = new Director(new PlayerBuilder());
+			//Sreen Resolutions
             graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;
+			//Change to true for fullScreen mode
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             ScreenManager.Initialize();
-
 
             gameObjects.Add(director.Construct());
 
@@ -94,14 +87,10 @@ namespace FirstYearExamination
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            texture = Helper.CreateTexture(GraphicsDevice, 100, 100, (x) => Color.Black);
 
             ScreenManager.LoadContent(Content);
 
-            foreach (var panel in Panels)
-            {
-                panel.LoadContent(GraphicsDevice);
-            }
+
 
             for (int i = 0; i < gameObjects.Count; i++)
 			{
@@ -131,14 +120,17 @@ namespace FirstYearExamination
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            ScreenManager.Update(gameTime);
+			DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            ScreenManager.Update(gameTime);
 
             // TODO: Add your update logic here
             for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Update(gameTime);
 			}
+
+			SpawnUnit();
 
 			base.Update(gameTime);
         }
@@ -156,17 +148,11 @@ namespace FirstYearExamination
 
             ScreenManager.Draw(spriteBatch);
 
-
             for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Draw(spriteBatch);
 			}
 
-
-            foreach (var panel in Panels)
-            {
-                panel.Draw(spriteBatch);
-            }
 
 
             spriteBatch.End();
@@ -174,24 +160,39 @@ namespace FirstYearExamination
 			base.Draw(gameTime);
         }
 
-        public void PanelDrawing()
-        {
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    // outer panels
-                    var panel1 = new Panel()
-                    {
-                        //Size of the Panels
-                        Dimensions = new Vector2(100, 100),
-                        Position = new Vector2(10 + j * 110, 10 + i * 110),
-                        Color = Color.Black,
-                    };
 
-                    Panels.Add(panel1);
-                }
-            }
-        }
-    }
+
+		public void AddGameObject(GameObject go)
+		{
+			go.Awake();
+			go.Start();
+			gameObjects.Add(go);
+
+			Collider c = (Collider)go.GetComponent("Collider");
+
+			if (c != null)
+			{
+				Colliders.Add(c);
+			}
+		}
+
+		public void RemoveGameObject(GameObject go)
+		{
+			gameObjects.Remove(go);
+		}
+
+		private void SpawnUnit()
+		{
+			unitSpawnTime += DeltaTime;
+
+			if(unitSpawnTime >= UnitCoolDown)
+			{
+				GameObject go = UnitPool.Instance.GetObject();
+				go.Transform.Position = new Vector2(-64, 64);
+				AddGameObject(go);
+
+				unitSpawnTime = 0;
+			}
+		}
+	}
 }
