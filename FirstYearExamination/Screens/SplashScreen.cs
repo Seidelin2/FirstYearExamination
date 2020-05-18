@@ -16,7 +16,7 @@ namespace FirstYearExamination.Screens
 
         //Variables for handling graphics
         private Texture2D background;
-        private string path = "Sprites/Map/Map_2";
+        private string path = "Sprites/TestPixel";
 
         /// <summary>
         /// Default contructor.

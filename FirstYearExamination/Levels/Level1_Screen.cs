@@ -1,4 +1,5 @@
-﻿using FirstYearExamination.Screens;
+﻿using FirstYearExamination.Gui;
+using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,21 +14,32 @@ namespace FirstYearExamination.Levels
     {
 
         private Texture2D background;
-        private string path = "Sprites/Map/Map_3";
+        private string path = "Sprites/Map/Map_1";
+
+        Texture2D texture;
+        List<Panel> Panels;
 
 
         public Level1_Screen()
         {
-            
+            Panels = new List<Panel>();
+            PanelDrawing();
         }
 
-        public override void LoadContent()
+        public void LoadContent(GraphicsDevice device)
         {
             //Set mouse cursor to visible.
             ScreenManager.IsMouseVisible = true;
 
+            texture = Helper.CreateTexture(device, 100, 100, (x) => Color.Black);
+
             base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
+
+            foreach (var panel in Panels)
+            {
+                panel.LoadContent(device);
+            }
         }
 
         public override void UnloadContent()
@@ -44,8 +56,33 @@ namespace FirstYearExamination.Levels
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
+            foreach (var panel in Panels)
+            {
+                panel.Draw(spriteBatch);
+            }
+
+            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+        }
+
+        public void PanelDrawing()
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    // outer panels
+                    var panel1 = new Panel()
+                    {
+                        //Size of the Panels
+                        Dimensions = new Vector2(64, 64),
+                        Position = new Vector2(10 + j * 72, 10 + i * 72),
+                        Color = Color.Black,
+                    };
+
+                    Panels.Add(panel1);
+                }
+            }
         }
     }
 }

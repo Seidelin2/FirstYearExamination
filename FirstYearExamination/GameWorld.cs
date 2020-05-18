@@ -32,8 +32,7 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D texture;
-        List<Panel> Panels;
+
 
         private List<GameObject> gameObjects = new List<GameObject>();
 		public List<Collider> Colliders { get; set; } = new List<Collider>();
@@ -47,8 +46,7 @@ namespace FirstYearExamination
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            Panels = new List<Panel>();
-            PanelDrawing();
+
 		}
 
 		/// <summary>
@@ -63,9 +61,10 @@ namespace FirstYearExamination
             IsMouseVisible = true;
 
             Director director = new Director(new PlayerBuilder());
-
+			//Sreen Resolutions
             graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;
+			//Change to true for fullScreen mode
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             ScreenManager.Initialize();
@@ -88,14 +87,10 @@ namespace FirstYearExamination
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            texture = Helper.CreateTexture(GraphicsDevice, 100, 100, (x) => Color.Black);
 
             ScreenManager.LoadContent(Content);
 
-            foreach (var panel in Panels)
-            {
-                panel.LoadContent(GraphicsDevice);
-            }
+
 
             for (int i = 0; i < gameObjects.Count; i++)
 			{
@@ -158,35 +153,14 @@ namespace FirstYearExamination
 				gameObjects[i].Draw(spriteBatch);
 			}
 
-            foreach (var panel in Panels)
-            {
-                panel.Draw(spriteBatch);
-            }
+
 
             spriteBatch.End();
 
 			base.Draw(gameTime);
         }
 
-        public void PanelDrawing()
-        {
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    // outer panels
-                    var panel1 = new Panel()
-                    {
-                        //Size of the Panels
-                        Dimensions = new Vector2(64, 64),
-                        Position = new Vector2(10 + j * 72, 10 + i * 72),
-                        Color = Color.Black,
-                    };
 
-                    Panels.Add(panel1);
-                }
-            }
-        }
 
 		public void AddGameObject(GameObject go)
 		{

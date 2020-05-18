@@ -57,6 +57,8 @@
     <Compile Include="GUI\Panel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Levels\Level1_Screen.cs" />
+    <Compile Include="Levels\Level2_Screen.cs" />
+    <Compile Include="Levels\Level3_Screen.cs" />
     <Compile Include="ObjectPool\ObjectPool.cs" />
     <Compile Include="ObjectPool\UnitPool.cs" />
     <Compile Include="Observer\GameEvent.cs" />
