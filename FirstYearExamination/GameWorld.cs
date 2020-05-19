@@ -1,11 +1,13 @@
 ﻿using FirstYearExamination.Builder;
 using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
+using FirstYearExamination.GUI;
 using FirstYearExamination.ObjectPool;
 using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace FirstYearExamination
@@ -33,6 +35,7 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+		GUIManager guiManager;
 
 
         private List<GameObject> gameObjects = new List<GameObject>();
@@ -42,11 +45,16 @@ namespace FirstYearExamination
 		private float unitSpawnTime;
 		private float UnitCoolDown = 1;
 
-        public GameWorld()
+
+        public Color backgroundColour = Color.CornflowerBlue;
+
+
+		public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+			guiManager = new GUIManager(this);
 
 		}
 
@@ -60,6 +68,7 @@ namespace FirstYearExamination
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
+			
 
             Director director = new Director(new PlayerBuilder());
 			//Sreen Resolutions
@@ -77,6 +86,7 @@ namespace FirstYearExamination
 				gameObjects[i].Awake();
 			}
 
+			
 			base.Initialize();
         }
 
@@ -98,6 +108,7 @@ namespace FirstYearExamination
 				gameObjects[i].Start();
 			}
 
+			guiManager.LoadContent();
 			// TODO: use this.Content to load your game content here
 		}
 
@@ -133,7 +144,7 @@ namespace FirstYearExamination
 
 			SpawnUnit();
 
-			base.Update(gameTime);
+			guiManager.Update(gameTime);
         }
 
         /// <summary>
@@ -142,7 +153,7 @@ namespace FirstYearExamination
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(backgroundColour);
 
 			// TODO: Add your drawing code here
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
@@ -155,8 +166,11 @@ namespace FirstYearExamination
 			}
 
 
+			guiManager.Draw(spriteBatch, gameTime);
 
-            spriteBatch.End();
+
+
+			spriteBatch.End();
 
 			base.Draw(gameTime);
         }
@@ -195,5 +209,7 @@ namespace FirstYearExamination
 				unitSpawnTime = 0;
 			}
 		}
+
+
 	}
 }
