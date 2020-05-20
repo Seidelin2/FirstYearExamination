@@ -1,5 +1,6 @@
 ﻿using FirstYearExamination.Builder;
 using FirstYearExamination.Components;
+using FirstYearExamination.Components.A_Star;
 using FirstYearExamination.Gui;
 using FirstYearExamination.ObjectPool;
 using Microsoft.Xna.Framework;
@@ -37,6 +38,7 @@ namespace FirstYearExamination
 
         private List<GameObject> gameObjects = new List<GameObject>();
 		public List<Collider> Colliders { get; set; } = new List<Collider>();
+		public Dictionary<Point, Cell> Cells = new Dictionary<Point, Cell>();
 
 		public static float DeltaTime { get; set; }
 		private float unitSpawnTime;
@@ -62,19 +64,23 @@ namespace FirstYearExamination
 			// TODO: Add your initialization logic here
 			IsMouseVisible = true;
 
-			Director director = new Director(new PlayerBuilder());
-
             graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             ScreenManager.Initialize();
 
-            gameObjects.Add(director.Construct());
-
 			for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Awake();
+			}
+
+			for(int x = 0; x < 16; x++)
+			{
+				for(int y = 0; y < 12; y++)
+				{
+					Cells.Add(new Point(x, y), new Cell(new Point(x, y)));
+				}
 			}
 
 			base.Initialize();
@@ -100,6 +106,11 @@ namespace FirstYearExamination
             for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Start();
+			}
+
+			foreach(Cell cell in Cells.Values)
+			{
+				cell.LoadContent(Content);
 			}
 
 			// TODO: use this.Content to load your game content here
@@ -135,7 +146,7 @@ namespace FirstYearExamination
 				gameObjects[i].Update(gameTime);
 			}
 
-			SpawnUnit();
+			//SpawnUnit();
 
 			base.Update(gameTime);
         }
@@ -162,6 +173,11 @@ namespace FirstYearExamination
             {
                 panel.Draw(spriteBatch);
             }
+
+			foreach (Cell cell in Cells.Values)
+			{
+				cell.Draw(spriteBatch);
+			}
 
             spriteBatch.End();
 
