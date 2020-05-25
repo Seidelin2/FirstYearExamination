@@ -1,6 +1,4 @@
-﻿using FirstYearExamination.Builder;
-using FirstYearExamination.Components;
-using FirstYearExamination.Components.A_Star;
+﻿using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
 using FirstYearExamination.ObjectPool;
 using Microsoft.Xna.Framework;
@@ -35,6 +33,7 @@ namespace FirstYearExamination
         SpriteBatch spriteBatch;
         Texture2D texture;
         List<Panel> Panels;
+		Unit unit;
 
         private List<GameObject> gameObjects = new List<GameObject>();
 		public List<Collider> Colliders { get; set; } = new List<Collider>();
@@ -75,13 +74,19 @@ namespace FirstYearExamination
 				gameObjects[i].Awake();
 			}
 
-			for(int x = 0; x < 16; x++)
+			for (int x = 0; x < 16; x++)
 			{
 				for(int y = 0; y < 12; y++)
 				{
 					Cells.Add(new Point(x, y), new Cell(new Point(x, y)));
 				}
 			}
+
+			GameObject go = UnitPool.Instance.GetObject();
+			AddGameObject(go);
+			unit = (Unit)go.GetComponent("Unit");
+
+			UnitPath();
 
 			base.Initialize();
         }
@@ -113,14 +118,16 @@ namespace FirstYearExamination
 				cell.LoadContent(Content);
 			}
 
+			unit.SetWaypoint(Cells[new Point(0, 1)]);
+
 			// TODO: use this.Content to load your game content here
 		}
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
+		/// <summary>
+		/// UnloadContent will be called once per game and is the place to unload
+		/// game-specific content.
+		/// </summary>
+		protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
             ScreenManager.UnloadContent();
@@ -146,6 +153,16 @@ namespace FirstYearExamination
 				gameObjects[i].Update(gameTime);
 			}
 
+			Collider[] tmpColliders = Colliders.ToArray();
+
+			for (int i = 0; i < tmpColliders.Length; i++)
+			{
+				for (int j = 0; j < tmpColliders.Length; j++)
+				{
+					tmpColliders[i].OnCollisionEnter(tmpColliders[j]);
+				}
+			}
+
 			//SpawnUnit();
 
 			base.Update(gameTime);
@@ -169,10 +186,10 @@ namespace FirstYearExamination
 				gameObjects[i].Draw(spriteBatch);
 			}
 
-            foreach (var panel in Panels)
-            {
-                panel.Draw(spriteBatch);
-            }
+            //foreach (var panel in Panels)
+            //{
+            //    panel.Draw(spriteBatch);
+            //}
 
 			foreach (Cell cell in Cells.Values)
 			{
@@ -227,14 +244,30 @@ namespace FirstYearExamination
 		{
 			unitSpawnTime += DeltaTime;
 
-			if(unitSpawnTime >= UnitCoolDown)
+			if (unitSpawnTime >= UnitCoolDown)
 			{
 				GameObject go = UnitPool.Instance.GetObject();
-				go.Transform.Position = new Vector2(-64, 64);
 				AddGameObject(go);
+				unit = (Unit)go.GetComponent("Unit");
 
 				unitSpawnTime = 0;
 			}
+		}
+
+		private void UnitPath()
+		{
+			#region Map_01
+			Cells[new Point(0, 1)].Neighbour = Cells[new Point(1, 1)];
+			Cells[new Point(0, 1)].Neighbour = Cells[new Point(12, 1)];
+			Cells[new Point(12, 1)].Neighbour = Cells[new Point(12, 2)];
+			Cells[new Point(12, 2)].Neighbour = Cells[new Point(13, 2)];
+			Cells[new Point(13, 2)].Neighbour = Cells[new Point(13, 5)];
+			Cells[new Point(13, 5)].Neighbour = Cells[new Point(1, 5)];
+			Cells[new Point(1, 5)].Neighbour = Cells[new Point(1, 9)];
+			Cells[new Point(1, 9)].Neighbour = Cells[new Point(2, 9)];
+			Cells[new Point(2, 9)].Neighbour = Cells[new Point(2, 10)];
+			Cells[new Point(2, 10)].Neighbour = Cells[new Point(15, 10)];
+			#endregion
 		}
 	}
 }

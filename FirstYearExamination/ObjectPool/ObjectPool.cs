@@ -9,18 +9,20 @@ namespace FirstYearExamination.ObjectPool
 	public abstract class ObjectPool
 	{
 		protected List<GameObject> active = new List<GameObject>();
-
 		protected Stack<GameObject> inactive = new Stack<GameObject>();
 
-		protected abstract GameObject Create();
-
-		protected abstract void Cleanup(GameObject gameObject);
+		public void ReleaseObject(GameObject gameObject)
+		{
+			GameWorld.Instance.RemoveGameObject(gameObject);
+			active.Remove(gameObject);
+			inactive.Push(gameObject);
+		}
 
 		public GameObject GetObject()
 		{
 			GameObject go;
 
-			if(inactive.Count > 0)
+			if (inactive.Count > 0)
 			{
 				go = inactive.Pop();
 			}
@@ -32,11 +34,8 @@ namespace FirstYearExamination.ObjectPool
 			return go;
 		}
 
-		public void ReleaseObject(GameObject gameObject)
-		{
-			GameWorld.Instance.RemoveGameObject(gameObject);
-			active.Remove(gameObject);
-			inactive.Push(gameObject);
-		}
+		protected abstract GameObject Create();
+
+		protected abstract void Cleanup(GameObject gameObject);
 	}
 }

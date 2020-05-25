@@ -10,7 +10,6 @@ namespace FirstYearExamination.Observer
 	public class GameEvent
 	{
 		private List<IGameListener> listeners = new List<IGameListener>();
-
 		public string Title { get; private set; }
 
 		public GameEvent(string title)

@@ -11,18 +11,19 @@ namespace FirstYearExamination.Components
 {
 	public class Unit : Component
 	{
-		private float speed;
-		private Vector2 velocity;
+		protected float speed;
+		protected Vector2 velocity;
+		private Cell currentCell;
 
-		public Unit(float speed, Vector2 velocity)
+		public Unit(float _speed)
 		{
-			this.speed = speed;
-			this.velocity = velocity;
+			this.speed = _speed;
 		}
 
 		public override void Awake()
 		{
 			GameObject.Tag = "Unit";
+			GameObject.Transform.Position = new Vector2(-64, 64);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -36,9 +37,29 @@ namespace FirstYearExamination.Components
 
 		}
 
+		public override string ToString()
+		{
+			return "Unit";
+		}
+
+		public void SetWaypoint(Cell _distination)
+		{
+			currentCell = _distination;
+
+			velocity = currentCell.WorldPos - GameObject.Transform.Position;
+			velocity = Vector2.Normalize(velocity);
+		}
+
 		private void Move()
 		{
-			GameObject.Transform.Translate(velocity * speed * GameWorld.DeltaTime);
+			if(Vector2.Distance(GameObject.Transform.Position, currentCell.WorldPos) > 1)
+			{
+				GameObject.Transform.Translate(velocity * speed * GameWorld.DeltaTime);
+			}
+			else if (currentCell.Neighbour != null)
+			{
+				SetWaypoint(currentCell.Neighbour);
+			}
 		}
 
 		private void CheckBounds()
