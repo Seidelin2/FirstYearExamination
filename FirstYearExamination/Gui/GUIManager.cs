@@ -19,8 +19,11 @@ namespace FirstYearExamination.GUI
 
         public GUIManager(GameWorld game )
         {
-
             this.game = game;
+        }
+
+        public GUIManager()
+        {
         }
 
         public virtual void Awake()

@@ -1,4 +1,5 @@
 ﻿using FirstYearExamination.Gui;
+using FirstYearExamination.GUI;
 using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -50,9 +51,11 @@ namespace FirstYearExamination.Levels
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
+
+
         }
 
 

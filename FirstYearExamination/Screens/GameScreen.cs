@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FirstYearExamination.GUI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,6 +14,7 @@ namespace FirstYearExamination.Screens
     {
         //Local ContentManager, unique to each GameScreen object, that handles its content.
         protected ContentManager gameScreenContent;
+
 
 
         public GameScreen()
@@ -40,6 +42,11 @@ namespace FirstYearExamination.Screens
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
+        {
+
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
 
         }
