@@ -82,9 +82,9 @@ namespace FirstYearExamination
 				}
 			}
 
-			GameObject go = UnitPool.Instance.GetObject();
-			AddGameObject(go);
-			unit = (Unit)go.GetComponent("Unit");
+			//GameObject go = UnitPool.Instance.GetObject();
+			//AddGameObject(go);
+			//unit = (Unit)go.GetComponent("Unit");
 
 			UnitPath();
 
@@ -118,7 +118,7 @@ namespace FirstYearExamination
 				cell.LoadContent(Content);
 			}
 
-			unit.SetWaypoint(Cells[new Point(0, 1)]);
+			//unit.SetWaypoint(Cells[new Point(0, 1)]);
 
 			// TODO: use this.Content to load your game content here
 		}
@@ -163,7 +163,7 @@ namespace FirstYearExamination
 				}
 			}
 
-			//SpawnUnit();
+			SpawnUnit();
 
 			base.Update(gameTime);
         }
@@ -249,7 +249,7 @@ namespace FirstYearExamination
 				GameObject go = UnitPool.Instance.GetObject();
 				AddGameObject(go);
 				unit = (Unit)go.GetComponent("Unit");
-
+				unit.SetWaypoint(Cells[new Point(0, 1)]);
 				unitSpawnTime = 0;
 			}
 		}
