@@ -19,10 +19,12 @@ namespace FirstYearExamination.Screens
 
         //Variables for handling graphics
         private Texture2D background;
-        private string backgroundPath = "Sprites/Map/Map_1";
+        private string backgroundPath = "Sprites/Map/Map_3";
 
-        public TitleScreen()
+        public TitleScreen(GameWorld gameWorld) : base(gameWorld)
         {
+            
+
             //if (!MenuManager.IsMenuOpen)
             //{
             //    MenuManager.OpenMenu("TitleMenu");
@@ -51,9 +53,12 @@ namespace FirstYearExamination.Screens
             HandleInput();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
+
+            base.Draw(spriteBatch, gameTime);
+
         }
 
         /// <summary>
@@ -65,7 +70,7 @@ namespace FirstYearExamination.Screens
 
             if (newKS.GetPressedKeys().Length != 0 && previousKS.GetPressedKeys().Length == 0)
             {
-                ScreenManager.ChangeScreenTo(new Level1_Screen());
+                ScreenManager.ChangeScreenTo(new Level1_Screen(this.gameWorld));
             }
 
             previousKS = newKS;

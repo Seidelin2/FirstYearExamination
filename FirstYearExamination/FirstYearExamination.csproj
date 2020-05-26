@@ -53,6 +53,7 @@
     <Compile Include="Factory\UnitFactory.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
+    <Compile Include="GUI\GUIManager.cs" />
     <Compile Include="GUI\GUIButtons.cs" />
     <Compile Include="GUI\Panel.cs" />
     <Compile Include="Helper.cs" />

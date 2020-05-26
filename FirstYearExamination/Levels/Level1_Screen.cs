@@ -1,7 +1,9 @@
 ﻿using FirstYearExamination.Gui;
+using FirstYearExamination.GUI;
 using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,34 +14,29 @@ namespace FirstYearExamination.Levels
 {
     class Level1_Screen : GameScreen
     {
+        //Used for HandleInput
+        private KeyboardState previousKS = Keyboard.GetState();
+        private KeyboardState newKS;
 
         private Texture2D background;
         private string path = "Sprites/Map/Map_1";
 
-        Texture2D texture;
-        List<Panel> Panels;
 
 
-        public Level1_Screen()
+        public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
         {
-            Panels = new List<Panel>();
-            PanelDrawing();
+
         }
 
-        public void LoadContent(GraphicsDevice device)
+        public override void LoadContent()
         {
             //Set mouse cursor to visible.
             ScreenManager.IsMouseVisible = true;
 
-            texture = Helper.CreateTexture(device, 100, 100, (x) => Color.Black);
-
             base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
 
-            foreach (var panel in Panels)
-            {
-                panel.LoadContent(device);
-            }
+
         }
 
         public override void UnloadContent()
@@ -50,39 +47,33 @@ namespace FirstYearExamination.Levels
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            
+
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-
-            foreach (var panel in Panels)
-            {
-                panel.Draw(spriteBatch);
-            }
-
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
+
+            base.Draw(spriteBatch, gameTime);
         }
 
-        public void PanelDrawing()
+
+        /// <summary>
+        /// HandleInput is just for testing purposes
+        /// To see if we are able to switch between screens
+        /// </summary>
+        public void HandleInput()
         {
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    // outer panels
-                    var panel1 = new Panel()
-                    {
-                        //Size of the Panels
-                        Dimensions = new Vector2(64, 64),
-                        Position = new Vector2(10 + j * 72, 10 + i * 72),
-                        Color = Color.Black,
-                    };
+            newKS = Keyboard.GetState();
 
-                    Panels.Add(panel1);
-                }
+            if (newKS.GetPressedKeys().Length != 0 && previousKS.GetPressedKeys().Length == 0)
+            {
+                ScreenManager.ChangeScreenTo(new Level2_Screen(this.gameWorld));
             }
+
+            previousKS = newKS;
         }
+
     }
 }
