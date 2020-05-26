@@ -40,7 +40,7 @@ namespace FirstYearExamination.GUI
 		{
             var randomButton = new GUIButtons(game.Content.Load<Texture2D>("Sprites/Towers/Tower_Holder1"), game.Content.Load<SpriteFont>("Fonts /Font"))
             {
-                Position = new Vector2(350, 200),
+                Position = new Vector2(950, 200),
                 Text = "Random",
             };
 
@@ -48,7 +48,7 @@ namespace FirstYearExamination.GUI
 
             var quitButton = new GUIButtons(game.Content.Load<Texture2D>("Sprites/Towers/Big_Missile"), game.Content.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(350, 250),
+                Position = new Vector2(950, 250),
                 Text = "Quit",
             };
 
