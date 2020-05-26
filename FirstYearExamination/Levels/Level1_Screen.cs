@@ -23,7 +23,7 @@ namespace FirstYearExamination.Levels
 
 
 
-        public Level1_Screen()
+        public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
         {
 
         }
@@ -55,7 +55,7 @@ namespace FirstYearExamination.Levels
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
-
+            base.Draw(spriteBatch, gameTime);
         }
 
 
@@ -69,7 +69,7 @@ namespace FirstYearExamination.Levels
 
             if (newKS.GetPressedKeys().Length != 0 && previousKS.GetPressedKeys().Length == 0)
             {
-                ScreenManager.ChangeScreenTo(new Level2_Screen());
+                ScreenManager.ChangeScreenTo(new Level2_Screen(this.gameWorld));
             }
 
             previousKS = newKS;

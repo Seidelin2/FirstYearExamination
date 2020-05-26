@@ -15,8 +15,9 @@ namespace FirstYearExamination.Levels
         private string path = "Sprites/Map/Map_2";
 
 
-        public Level2_Screen()
+        public Level2_Screen(GameWorld gameWorld) : base(gameWorld)
         {
+           
 
         }
 
@@ -41,9 +42,11 @@ namespace FirstYearExamination.Levels
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
+
+            base.Draw(spriteBatch, gameTime);
 
         }
     }

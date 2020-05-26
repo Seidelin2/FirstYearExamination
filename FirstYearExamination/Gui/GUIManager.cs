@@ -1,5 +1,6 @@
 ﻿using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
+using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,11 +16,11 @@ namespace FirstYearExamination.GUI
     {
         private List<Component> _gameComponents;               
 
-        private readonly GameWorld game;
+        private readonly GameScreen gameScreen;
 
-        public GUIManager(GameWorld game )
+        public GUIManager(GameScreen gameScreen)
         {
-            this.game = game;
+            this.gameScreen = gameScreen;
         }
 
         public GUIManager()
@@ -38,7 +39,7 @@ namespace FirstYearExamination.GUI
 
 		public virtual void LoadContent()
 		{
-            var randomButton = new GUIButtons(game.Content.Load<Texture2D>("Sprites/Towers/Tower_Holder1"), game.Content.Load<SpriteFont>("Fonts /Font"))
+            var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/Towers/Tower_Holder1"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
             {
                 Position = new Vector2(950, 200),
                 Text = "Random",
@@ -46,7 +47,7 @@ namespace FirstYearExamination.GUI
 
             randomButton.Click += RandomButton_Click;
 
-            var quitButton = new GUIButtons(game.Content.Load<Texture2D>("Sprites/Towers/Big_Missile"), game.Content.Load<SpriteFont>("Fonts/Font"))
+            var quitButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/Towers/Big_Missile"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(950, 250),
                 Text = "Quit",
@@ -79,14 +80,14 @@ namespace FirstYearExamination.GUI
 
         private void QuitButton_Click(object sender, System.EventArgs e)
         {
-            game.Exit();
+            gameScreen.gameWorld.Exit();
         }
 
         private void RandomButton_Click(object sender, System.EventArgs e)
         {
             var random = new Random();
 
-            game.backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+            gameScreen.gameWorld.backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
         }
     }
 }

@@ -21,9 +21,9 @@ namespace FirstYearExamination.Screens
         /// <summary>
         /// Default contructor.
         /// </summary>
-        public SplashScreen()
+        public SplashScreen(GameWorld gameWorld) : base(gameWorld)
         {
-
+            
         }
 
         public override void LoadContent()
@@ -43,9 +43,11 @@ namespace FirstYearExamination.Screens
             HandleInput();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
+
+
         }
 
         public void HandleInput()
@@ -54,7 +56,7 @@ namespace FirstYearExamination.Screens
 
             if (newKS.GetPressedKeys().Length != 0 && previousKS.GetPressedKeys().Length == 0)
             {
-                ScreenManager.ChangeScreenTo(new TitleScreen());
+                ScreenManager.ChangeScreenTo(new TitleScreen(this.gameWorld));
             }
 
             previousKS = newKS;

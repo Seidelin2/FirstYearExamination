@@ -10,22 +10,28 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Screens
 {
-    abstract class GameScreen
+    public abstract class GameScreen
     {
         //Local ContentManager, unique to each GameScreen object, that handles its content.
-        protected ContentManager gameScreenContent;
+        public ContentManager gameScreenContent;
+        private GUIManager guiManager;
+        public GameWorld gameWorld;
 
 
 
-        public GameScreen()
+        public GameScreen(GameWorld gameWorld)
         {
-
+            guiManager = new GUIManager(this);
+            this.gameWorld = gameWorld;
         }
 
         public virtual void LoadContent()
         {
             //Refers gameScreenContent to ScreenManager's ServiceProvider, and sets the root directory.
             gameScreenContent = new ContentManager(ScreenManager.ContentManager.ServiceProvider, "Content");
+
+            guiManager.LoadContent();
+
         }
 
         /// <summary>
@@ -38,16 +44,14 @@ namespace FirstYearExamination.Screens
 
         public virtual void Update(GameTime gameTime)
         {
+            guiManager.Update(gameTime);
 
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-
-        }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
+            guiManager.Draw(spriteBatch, gameTime);
 
         }
     }

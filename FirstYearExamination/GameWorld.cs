@@ -35,7 +35,6 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-		GUIManager guiManager;
 
 
         private List<GameObject> gameObjects = new List<GameObject>();
@@ -54,7 +53,6 @@ namespace FirstYearExamination
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-			guiManager = new GUIManager(this);
 
 		}
 
@@ -77,7 +75,7 @@ namespace FirstYearExamination
 			//Change to true for fullScreen mode
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-            ScreenManager.Initialize();
+            ScreenManager.Initialize(this);
 
             gameObjects.Add(director.Construct());
 
@@ -108,7 +106,6 @@ namespace FirstYearExamination
 				gameObjects[i].Start();
 			}
 
-			guiManager.LoadContent();
 			// TODO: use this.Content to load your game content here
 		}
 
@@ -144,7 +141,6 @@ namespace FirstYearExamination
 
 			SpawnUnit();
 
-			guiManager.Update(gameTime);
         }
 
         /// <summary>
@@ -158,16 +154,12 @@ namespace FirstYearExamination
 			// TODO: Add your drawing code here
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-            ScreenManager.Draw(spriteBatch);
+            ScreenManager.Draw(spriteBatch, gameTime);
 
             for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Draw(spriteBatch);
 			}
-
-
-			guiManager.Draw(spriteBatch, gameTime);
-
 
 
 			spriteBatch.End();
@@ -209,7 +201,6 @@ namespace FirstYearExamination
 				unitSpawnTime = 0;
 			}
 		}
-
 
 	}
 }
