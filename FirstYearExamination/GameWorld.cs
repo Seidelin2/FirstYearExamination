@@ -34,10 +34,7 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D texture;
-        List<Panel> Panels;
 		Unit unit;
-
 
         private List<GameObject> gameObjects = new List<GameObject>();
 		public List<Collider> Colliders { get; set; } = new List<Collider>();
@@ -47,16 +44,12 @@ namespace FirstYearExamination
 		private float unitSpawnTime;
 		private float UnitCoolDown = 1;
 
-
         public Color backgroundColour = Color.CornflowerBlue;
-
 
 		public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-
-
+			Content.RootDirectory = "Content";
 		}
 
 		/// <summary>
@@ -70,7 +63,6 @@ namespace FirstYearExamination
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
 			
-
             graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;
 			//Change to true for fullScreen mode
@@ -91,10 +83,6 @@ namespace FirstYearExamination
 				}
 			}
 
-			//GameObject go = UnitPool.Instance.GetObject();
-			//AddGameObject(go);
-			//unit = (Unit)go.GetComponent("Unit");
-
 			UnitPath();
 
 			base.Initialize();
@@ -110,8 +98,6 @@ namespace FirstYearExamination
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ScreenManager.LoadContent(Content);
-
-
 
             for (int i = 0; i < gameObjects.Count; i++)
 			{
@@ -136,7 +122,6 @@ namespace FirstYearExamination
         {
             // TODO: Unload any non ContentManager content here
             ScreenManager.UnloadContent();
-
         }
 
         /// <summary>
@@ -169,7 +154,6 @@ namespace FirstYearExamination
 			}
 
 			SpawnUnit();
-
         }
 
         /// <summary>
@@ -190,11 +174,6 @@ namespace FirstYearExamination
 				gameObjects[i].Draw(spriteBatch);
 			}
 
-            //foreach (var panel in Panels)
-            //{
-            //    panel.Draw(spriteBatch);
-            //}
-
 			foreach (Cell cell in Cells.Values)
 			{
 				cell.Draw(spriteBatch);
@@ -204,8 +183,6 @@ namespace FirstYearExamination
 
 			base.Draw(gameTime);
         }
-
-
 
 		public void AddGameObject(GameObject go)
 		{
