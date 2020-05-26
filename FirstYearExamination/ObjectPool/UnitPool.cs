@@ -32,7 +32,7 @@ namespace FirstYearExamination.ObjectPool
 
 		protected override GameObject Create()
 		{
-			return UnitFactory.Instance.Create("Unit");
+			return UnitFactory.Instance.Create("SoldierA");
 		}
 	}
 }
