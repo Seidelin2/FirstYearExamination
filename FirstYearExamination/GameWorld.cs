@@ -31,8 +31,6 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D texture;
-        List<Panel> Panels;
 		Unit unit;
 
         private List<GameObject> gameObjects = new List<GameObject>();
@@ -47,9 +45,6 @@ namespace FirstYearExamination
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            Panels = new List<Panel>();
-            PanelDrawing();
 		}
 
 		/// <summary>
@@ -82,10 +77,6 @@ namespace FirstYearExamination
 				}
 			}
 
-			//GameObject go = UnitPool.Instance.GetObject();
-			//AddGameObject(go);
-			//unit = (Unit)go.GetComponent("Unit");
-
 			UnitPath();
 
 			base.Initialize();
@@ -99,14 +90,7 @@ namespace FirstYearExamination
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            texture = Helper.CreateTexture(GraphicsDevice, 100, 100, (x) => Color.Black);
-
             ScreenManager.LoadContent(Content);
-
-            foreach (var panel in Panels)
-            {
-                panel.LoadContent(GraphicsDevice);
-            }
 
             for (int i = 0; i < gameObjects.Count; i++)
 			{
@@ -163,6 +147,11 @@ namespace FirstYearExamination
 				}
 			}
 
+			foreach(Unit unit in units)
+			{
+				unit.Update(gameTime);
+			}
+
 			SpawnUnit();
 
 			base.Update(gameTime);
@@ -186,11 +175,6 @@ namespace FirstYearExamination
 				gameObjects[i].Draw(spriteBatch);
 			}
 
-            //foreach (var panel in Panels)
-            //{
-            //    panel.Draw(spriteBatch);
-            //}
-
 			foreach (Cell cell in Cells.Values)
 			{
 				cell.Draw(spriteBatch);
@@ -199,26 +183,6 @@ namespace FirstYearExamination
             spriteBatch.End();
 
 			base.Draw(gameTime);
-        }
-
-        public void PanelDrawing()
-        {
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    // outer panels
-                    var panel1 = new Panel()
-                    {
-                        //Size of the Panels
-                        Dimensions = new Vector2(64, 64),
-                        Position = new Vector2(10 + j * 72, 10 + i * 72),
-                        Color = Color.Black,
-                    };
-
-                    Panels.Add(panel1);
-                }
-            }
         }
 
 		public void AddGameObject(GameObject go)
