@@ -1,9 +1,6 @@
-﻿using FirstYearExamination.Gui;
-using FirstYearExamination.GUI;
-using FirstYearExamination.Screens;
+﻿using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +9,15 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Levels
 {
-    class Level1_Screen : GameScreen
+    class Level2_Screen : GameScreen
     {
-        //Used for HandleInput
-        private KeyboardState previousKS = Keyboard.GetState();
-        private KeyboardState newKS;
-
         private Texture2D background;
-        private string path = "Sprites/Map/Map_1";
+        private string path = "Sprites/Map/Map_2";
 
 
-
-        public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
+        public Level2_Screen(GameWorld gameWorld) : base(gameWorld)
         {
+           
 
         }
 
@@ -35,8 +28,6 @@ namespace FirstYearExamination.Levels
 
             base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
-
-
         }
 
         public override void UnloadContent()
@@ -56,24 +47,7 @@ namespace FirstYearExamination.Levels
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
             base.Draw(spriteBatch, gameTime);
+
         }
-
-
-        /// <summary>
-        /// HandleInput is just for testing purposes
-        /// To see if we are able to switch between screens
-        /// </summary>
-        public void HandleInput()
-        {
-            newKS = Keyboard.GetState();
-
-            if (newKS.GetPressedKeys().Length != 0 && previousKS.GetPressedKeys().Length == 0)
-            {
-                ScreenManager.ChangeScreenTo(new Level2_Screen(this.gameWorld));
-            }
-
-            previousKS = newKS;
-        }
-
     }
 }

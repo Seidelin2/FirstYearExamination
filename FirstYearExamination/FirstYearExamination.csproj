@@ -51,10 +51,13 @@
     <Compile Include="Factory\UnitFactory.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
+    <Compile Include="GUI\GUIManager.cs" />
     <Compile Include="GUI\GUIButtons.cs" />
     <Compile Include="GUI\Panel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Levels\Level1_Screen.cs" />
+    <Compile Include="Levels\Level2_Screen.cs" />
+    <Compile Include="Levels\Level3_Screen.cs" />
     <Compile Include="ObjectPool\ObjectPool.cs" />
     <Compile Include="ObjectPool\UnitPool.cs" />
     <Compile Include="Observer\GameEvent.cs" />

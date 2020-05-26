@@ -1,9 +1,12 @@
 ﻿using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
+using FirstYearExamination.GUI;
 using FirstYearExamination.ObjectPool;
+using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace FirstYearExamination
@@ -41,7 +44,9 @@ namespace FirstYearExamination
 		private float unitSpawnTime;
 		private float UnitCoolDown = 1;
 
-        public GameWorld()
+        public Color backgroundColour = Color.CornflowerBlue;
+
+		public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -55,14 +60,15 @@ namespace FirstYearExamination
 		/// </summary>
 		protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
-			IsMouseVisible = true;
-
+            // TODO: Add your initialization logic here
+            IsMouseVisible = true;
+			
             graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;
+			//Change to true for fullScreen mode
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-            ScreenManager.Initialize();
+            ScreenManager.Initialize(this);
 
 			for (int i = 0; i < gameObjects.Count; i++)
 			{
@@ -115,7 +121,6 @@ namespace FirstYearExamination
         {
             // TODO: Unload any non ContentManager content here
             ScreenManager.UnloadContent();
-
         }
 
         /// <summary>
@@ -153,8 +158,6 @@ namespace FirstYearExamination
 			}
 
 			SpawnUnit();
-
-			base.Update(gameTime);
         }
 
         /// <summary>
@@ -163,12 +166,12 @@ namespace FirstYearExamination
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(backgroundColour);
 
 			// TODO: Add your drawing code here
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-            ScreenManager.Draw(spriteBatch);
+            ScreenManager.Draw(spriteBatch, gameTime);
 
             for (int i = 0; i < gameObjects.Count; i++)
 			{

@@ -32,6 +32,10 @@ namespace FirstYearExamination.Components
 		{
 
 		}
+		public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+		{
+
+		}
 
 		public virtual void Destroy()
 		{

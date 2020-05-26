@@ -35,9 +35,9 @@ namespace FirstYearExamination
         /// <summary>
         /// Sets initial screen parameters when game starts.
         /// </summary>
-        public static void Initialize()
+        public static void Initialize(GameWorld gameWorld)
         {
-            CurrentScreen = new SplashScreen();
+            CurrentScreen = new SplashScreen(gameWorld);
         }
 
         /// <summary>
@@ -84,9 +84,9 @@ namespace FirstYearExamination
         /// Draws the screen.
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            CurrentScreen.Draw(spriteBatch);
+            CurrentScreen.Draw(spriteBatch, gameTime);
         }
 
         /// <summary>
