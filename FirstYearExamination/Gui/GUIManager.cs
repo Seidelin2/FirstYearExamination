@@ -39,17 +39,17 @@ namespace FirstYearExamination.GUI
 
 		public virtual void LoadContent()
 		{
-            var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/Towers/Tower_Holder1"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
+            var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
             {
-                Position = new Vector2(950, 200),
+                Position = new Vector2(950, 176),
                 Text = "Random",
             };
 
             randomButton.Click += RandomButton_Click;
 
-            var quitButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/Towers/Big_Missile"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
+            var quitButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Quit"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(950, 250),
+                Position = new Vector2(950, 256),
                 Text = "Quit",
             };
 
