@@ -31,14 +31,18 @@ namespace FirstYearExamination.Factory
 			GameObject go = new GameObject();
 			SpriteRenderer sr = new SpriteRenderer();
 			go.AddComponent(sr);
-			go.Tag = "Unit";
 
 			switch (type)
 			{
-				case "Unit":
+				case "SoldierA":
 					sr.SetSprite("Sprites/Unit/Unit_SoldierA");
-					go.AddComponent(new Collider(sr) { CheckCollisionEvents = true });
-					go.AddComponent(new Unit(100, new Vector2(1, 0)));
+					go.AddComponent(new Collider(sr));
+					go.AddComponent(new Unit(100));
+					break;
+				case "SoldierB":
+					sr.SetSprite("Sprites/Unit/Unit_SoldierB");
+					go.AddComponent(new Collider(sr));
+					go.AddComponent(new Unit(100));
 					break;
 			}
 
