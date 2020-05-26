@@ -23,7 +23,12 @@ namespace FirstYearExamination.Components
 		public override void Awake()
 		{
 			GameObject.Tag = "Unit";
-			GameObject.Transform.Position = new Vector2(-64, 64);
+			//Map_01 Spawn Position
+			//GameObject.Transform.Position = new Vector2(-64, 64);
+			//Map_02 Spawn Position
+			//GameObject.Transform.Position = new Vector2(64, -64);
+			//Map_03 Spawn Position
+			GameObject.Transform.Position = new Vector2(832, -64);
 		}
 
 		public override void Update(GameTime gameTime)
