@@ -47,7 +47,7 @@ namespace FirstYearExamination.Levels
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
+            HandleInput();
 
         }
 
