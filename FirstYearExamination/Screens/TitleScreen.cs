@@ -19,7 +19,7 @@ namespace FirstYearExamination.Screens
 
         //Variables for handling graphics
         private Texture2D background;
-        private string backgroundPath = "Sprites/Map/Map_3";
+        private string backgroundPath = "Sprites/TestPixel";
 
         public TitleScreen(GameWorld gameWorld) : base(gameWorld)
         {

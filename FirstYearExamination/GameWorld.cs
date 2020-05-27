@@ -1,5 +1,4 @@
-﻿using FirstYearExamination.Builder;
-using FirstYearExamination.Components;
+﻿using FirstYearExamination.Components;
 using FirstYearExamination.Gui;
 using FirstYearExamination.GUI;
 using FirstYearExamination.ObjectPool;
@@ -35,25 +34,22 @@ namespace FirstYearExamination
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+		Unit unit;
 
         private List<GameObject> gameObjects = new List<GameObject>();
 		public List<Collider> Colliders { get; set; } = new List<Collider>();
+		public Dictionary<Point, Cell> Cells = new Dictionary<Point, Cell>();
 
 		public static float DeltaTime { get; set; }
 		private float unitSpawnTime;
 		private float UnitCoolDown = 1;
 
-
         public Color backgroundColour = Color.CornflowerBlue;
-
 
 		public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-
 		}
 
 		/// <summary>
@@ -67,9 +63,6 @@ namespace FirstYearExamination
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
 			
-
-            Director director = new Director(new PlayerBuilder());
-			//Sreen Resolutions
             graphics.PreferredBackBufferWidth = (int)ScreenManager.ScreenDimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.ScreenDimensions.Y;
 			//Change to true for fullScreen mode
@@ -77,14 +70,21 @@ namespace FirstYearExamination
             graphics.ApplyChanges();
             ScreenManager.Initialize(this);
 
-            gameObjects.Add(director.Construct());
-
 			for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Awake();
 			}
 
-			
+			for (int x = 0; x < 16; x++)
+			{
+				for(int y = 0; y < 12; y++)
+				{
+					Cells.Add(new Point(x, y), new Cell(new Point(x, y)));
+				}
+			}
+
+			UnitPath();
+
 			base.Initialize();
         }
 
@@ -96,28 +96,31 @@ namespace FirstYearExamination
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             ScreenManager.LoadContent(Content);
-
-
 
             for (int i = 0; i < gameObjects.Count; i++)
 			{
 				gameObjects[i].Start();
 			}
 
+			foreach(Cell cell in Cells.Values)
+			{
+				cell.LoadContent(Content);
+			}
+
+			//unit.SetWaypoint(Cells[new Point(0, 1)]);
+
 			// TODO: use this.Content to load your game content here
 		}
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
+		/// <summary>
+		/// UnloadContent will be called once per game and is the place to unload
+		/// game-specific content.
+		/// </summary>
+		protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
             ScreenManager.UnloadContent();
-
         }
 
         /// <summary>
@@ -139,8 +142,17 @@ namespace FirstYearExamination
 				gameObjects[i].Update(gameTime);
 			}
 
-			SpawnUnit();
+			Collider[] tmpColliders = Colliders.ToArray();
 
+			for (int i = 0; i < tmpColliders.Length; i++)
+			{
+				for (int j = 0; j < tmpColliders.Length; j++)
+				{
+					tmpColliders[i].OnCollisionEnter(tmpColliders[j]);
+				}
+			}
+
+			SpawnUnit();
         }
 
         /// <summary>
@@ -161,13 +173,15 @@ namespace FirstYearExamination
 				gameObjects[i].Draw(spriteBatch);
 			}
 
+			foreach (Cell cell in Cells.Values)
+			{
+				cell.Draw(spriteBatch);
+			}
 
-			spriteBatch.End();
+            spriteBatch.End();
 
 			base.Draw(gameTime);
         }
-
-
 
 		public void AddGameObject(GameObject go)
 		{
@@ -192,15 +206,66 @@ namespace FirstYearExamination
 		{
 			unitSpawnTime += DeltaTime;
 
-			if(unitSpawnTime >= UnitCoolDown)
+			if (unitSpawnTime >= UnitCoolDown)
 			{
 				GameObject go = UnitPool.Instance.GetObject();
-				go.Transform.Position = new Vector2(-64, 64);
 				AddGameObject(go);
-
+				unit = (Unit)go.GetComponent("Unit");
+				//Map_01 New Neighbour/Waypoint
+				//unit.SetWaypoint(Cells[new Point(0, 1)]);
+				//Map_02 New Neighbour/Waypoint
+				//unit.SetWaypoint(Cells[new Point(1, 0)]);
+				//Map_03 New Neighbour/Waypoint
+				unit.SetWaypoint(Cells[new Point(13, 2)]);
 				unitSpawnTime = 0;
 			}
 		}
 
+		private void UnitPath()
+		{
+			#region Map_01
+			//Cells[new Point(0, 1)].Neighbour = Cells[new Point(12, 1)];
+			//Cells[new Point(12, 1)].Neighbour = Cells[new Point(12, 2)];
+			//Cells[new Point(12, 2)].Neighbour = Cells[new Point(13, 2)];
+			//Cells[new Point(13, 2)].Neighbour = Cells[new Point(13, 5)];
+			//Cells[new Point(13, 5)].Neighbour = Cells[new Point(1, 5)];
+			//Cells[new Point(1, 5)].Neighbour = Cells[new Point(1, 9)];
+			//Cells[new Point(1, 9)].Neighbour = Cells[new Point(2, 9)];
+			//Cells[new Point(2, 9)].Neighbour = Cells[new Point(2, 10)];
+			//Cells[new Point(2, 10)].Neighbour = Cells[new Point(15, 10)];
+			#endregion
+
+			#region Map_02
+			//Cells[new Point(1, 0)].Neighbour = Cells[new Point(1, 10)];
+			//Cells[new Point(1, 10)].Neighbour = Cells[new Point(5, 10)];
+			//Cells[new Point(5, 10)].Neighbour = Cells[new Point(5, 2)];
+			//Cells[new Point(5, 2)].Neighbour = Cells[new Point(12, 2)];
+			//Cells[new Point(12, 2)].Neighbour = Cells[new Point(12, 3)];
+			//Cells[new Point(12, 3)].Neighbour = Cells[new Point(13, 3)];
+			//Cells[new Point(13, 3)].Neighbour = Cells[new Point(13, 6)];
+			//Cells[new Point(13, 6)].Neighbour = Cells[new Point(8, 6)];
+			//Cells[new Point(8, 6)].Neighbour = Cells[new Point(8, 10)];
+			//Cells[new Point(8, 10)].Neighbour = Cells[new Point(13, 10)];
+			//Cells[new Point(13, 10)].Neighbour = Cells[new Point(13, 11)];
+			#endregion
+
+			#region Map_03
+			Cells[new Point(13, 2)].Neighbour = Cells[new Point(10, 2)];
+			Cells[new Point(10, 2)].Neighbour = Cells[new Point(10, 1)];
+			Cells[new Point(10, 1)].Neighbour = Cells[new Point(2, 1)];
+			Cells[new Point(2, 1)].Neighbour = Cells[new Point(2, 5)];
+			Cells[new Point(2, 5)].Neighbour = Cells[new Point(1, 5)];
+			Cells[new Point(1, 5)].Neighbour = Cells[new Point(1, 8)];
+			Cells[new Point(1, 8)].Neighbour = Cells[new Point(2, 8)];
+			Cells[new Point(2, 8)].Neighbour = Cells[new Point(2, 10)];
+			Cells[new Point(2, 10)].Neighbour = Cells[new Point(5, 10)];
+			Cells[new Point(5, 10)].Neighbour = Cells[new Point(5, 5)];
+			Cells[new Point(5, 5)].Neighbour = Cells[new Point(9, 5)];
+			Cells[new Point(9, 5)].Neighbour = Cells[new Point(9, 7)];
+			Cells[new Point(9, 7)].Neighbour = Cells[new Point(10, 7)];
+			Cells[new Point(10, 7)].Neighbour = Cells[new Point(10, 10)];
+			Cells[new Point(10, 10)].Neighbour = Cells[new Point(15, 10)];
+			#endregion
+		}
 	}
 }
