@@ -1,6 +1,4 @@
-﻿using FirstYearExamination.Gui;
-using FirstYearExamination.GUI;
-using FirstYearExamination.Screens;
+﻿using FirstYearExamination.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -21,34 +19,31 @@ namespace FirstYearExamination.Levels
         private Texture2D background;
         private string path = "Sprites/Map/Map_1";
 
-
-
-        public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
+		public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
         {
 
         }
 
-        public override void LoadContent()
+		public override void LoadContent()
         {
             //Set mouse cursor to visible.
             ScreenManager.IsMouseVisible = true;
 
-            base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
+			GameWorld.Instance.UnitPath(1);
+            base.LoadContent();
+		}
 
-
-        }
-
-        public override void UnloadContent()
+		public override void UnloadContent()
         {
             base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             HandleInput();
-
+			GameWorld.Instance.SpawnUnit(1);
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -57,7 +52,6 @@ namespace FirstYearExamination.Levels
 
             base.Draw(spriteBatch, gameTime);
         }
-
 
         /// <summary>
         /// HandleInput is just for testing purposes
@@ -74,6 +68,5 @@ namespace FirstYearExamination.Levels
 
             previousKS = newKS;
         }
-
-    }
+	}
 }
