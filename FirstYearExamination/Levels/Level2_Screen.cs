@@ -19,7 +19,6 @@ namespace FirstYearExamination.Levels
         private Texture2D background;
         private string path = "Sprites/Map/Map_2";
 
-
         public Level2_Screen(GameWorld gameWorld) : base(gameWorld)
         {
            
@@ -31,23 +30,24 @@ namespace FirstYearExamination.Levels
             //Set mouse cursor to visible.
             ScreenManager.IsMouseVisible = true;
 
-            base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
-        }
+			GameWorld.Instance.UnitPath(2);
+            base.LoadContent();
+		}
 
-        public override void UnloadContent()
+		public override void UnloadContent()
         {
             base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             HandleInput();
+			GameWorld.Instance.SpawnUnit(2);
+            base.Update(gameTime);
+		}
 
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+		public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
 

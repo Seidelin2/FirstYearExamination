@@ -17,8 +17,6 @@ namespace FirstYearExamination.Screens
         private GUIManager guiManager;
         public GameWorld gameWorld;
 
-
-
         public GameScreen(GameWorld gameWorld)
         {
             guiManager = new GUIManager(this);
@@ -31,7 +29,6 @@ namespace FirstYearExamination.Screens
             gameScreenContent = new ContentManager(ScreenManager.ContentManager.ServiceProvider, "Content");
 
             guiManager.LoadContent();
-
         }
 
         /// <summary>
@@ -45,14 +42,12 @@ namespace FirstYearExamination.Screens
         public virtual void Update(GameTime gameTime)
         {
             guiManager.Update(gameTime);
-
         }
 
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             guiManager.Draw(spriteBatch, gameTime);
-
         }
     }
 }

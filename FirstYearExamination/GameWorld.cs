@@ -83,8 +83,6 @@ namespace FirstYearExamination
 				}
 			}
 
-			UnitPath();
-
 			base.Initialize();
         }
 
@@ -107,8 +105,6 @@ namespace FirstYearExamination
 			{
 				cell.LoadContent(Content);
 			}
-
-			//unit.SetWaypoint(Cells[new Point(0, 1)]);
 
 			// TODO: use this.Content to load your game content here
 		}
@@ -151,8 +147,6 @@ namespace FirstYearExamination
 					tmpColliders[i].OnCollisionEnter(tmpColliders[j]);
 				}
 			}
-
-			SpawnUnit();
         }
 
         /// <summary>
@@ -202,7 +196,7 @@ namespace FirstYearExamination
 			gameObjects.Remove(go);
 		}
 
-		private void SpawnUnit()
+		public void SpawnUnit(int screen)
 		{
 			unitSpawnTime += DeltaTime;
 
@@ -211,61 +205,77 @@ namespace FirstYearExamination
 				GameObject go = UnitPool.Instance.GetObject();
 				AddGameObject(go);
 				unit = (Unit)go.GetComponent("Unit");
-				//Map_01 New Neighbour/Waypoint
-				//unit.SetWaypoint(Cells[new Point(0, 1)]);
-				//Map_02 New Neighbour/Waypoint
-				//unit.SetWaypoint(Cells[new Point(1, 0)]);
-				//Map_03 New Neighbour/Waypoint
-				unit.SetWaypoint(Cells[new Point(13, 2)]);
+				if(screen == 1)
+				{
+					//Map_01 New Neighbour/Waypoint
+					unit.SetWaypoint(Cells[new Point(0, 1)]);
+				}
+				else if (screen == 2)
+				{
+					//Map_02 New Neighbour/Waypoint
+					unit.SetWaypoint(Cells[new Point(1, 0)]);
+				}
+				else if (screen == 3)
+				{
+					//Map_03 New Neighbour/Waypoint
+					unit.SetWaypoint(Cells[new Point(13, 2)]);
+				}
 				unitSpawnTime = 0;
 			}
 		}
 
-		private void UnitPath()
+		public void UnitPath(int screen)
 		{
-			#region Map_01
-			//Cells[new Point(0, 1)].Neighbour = Cells[new Point(12, 1)];
-			//Cells[new Point(12, 1)].Neighbour = Cells[new Point(12, 2)];
-			//Cells[new Point(12, 2)].Neighbour = Cells[new Point(13, 2)];
-			//Cells[new Point(13, 2)].Neighbour = Cells[new Point(13, 5)];
-			//Cells[new Point(13, 5)].Neighbour = Cells[new Point(1, 5)];
-			//Cells[new Point(1, 5)].Neighbour = Cells[new Point(1, 9)];
-			//Cells[new Point(1, 9)].Neighbour = Cells[new Point(2, 9)];
-			//Cells[new Point(2, 9)].Neighbour = Cells[new Point(2, 10)];
-			//Cells[new Point(2, 10)].Neighbour = Cells[new Point(15, 10)];
-			#endregion
-
-			#region Map_02
-			//Cells[new Point(1, 0)].Neighbour = Cells[new Point(1, 10)];
-			//Cells[new Point(1, 10)].Neighbour = Cells[new Point(5, 10)];
-			//Cells[new Point(5, 10)].Neighbour = Cells[new Point(5, 2)];
-			//Cells[new Point(5, 2)].Neighbour = Cells[new Point(12, 2)];
-			//Cells[new Point(12, 2)].Neighbour = Cells[new Point(12, 3)];
-			//Cells[new Point(12, 3)].Neighbour = Cells[new Point(13, 3)];
-			//Cells[new Point(13, 3)].Neighbour = Cells[new Point(13, 6)];
-			//Cells[new Point(13, 6)].Neighbour = Cells[new Point(8, 6)];
-			//Cells[new Point(8, 6)].Neighbour = Cells[new Point(8, 10)];
-			//Cells[new Point(8, 10)].Neighbour = Cells[new Point(13, 10)];
-			//Cells[new Point(13, 10)].Neighbour = Cells[new Point(13, 11)];
-			#endregion
-
-			#region Map_03
-			Cells[new Point(13, 2)].Neighbour = Cells[new Point(10, 2)];
-			Cells[new Point(10, 2)].Neighbour = Cells[new Point(10, 1)];
-			Cells[new Point(10, 1)].Neighbour = Cells[new Point(2, 1)];
-			Cells[new Point(2, 1)].Neighbour = Cells[new Point(2, 5)];
-			Cells[new Point(2, 5)].Neighbour = Cells[new Point(1, 5)];
-			Cells[new Point(1, 5)].Neighbour = Cells[new Point(1, 8)];
-			Cells[new Point(1, 8)].Neighbour = Cells[new Point(2, 8)];
-			Cells[new Point(2, 8)].Neighbour = Cells[new Point(2, 10)];
-			Cells[new Point(2, 10)].Neighbour = Cells[new Point(5, 10)];
-			Cells[new Point(5, 10)].Neighbour = Cells[new Point(5, 5)];
-			Cells[new Point(5, 5)].Neighbour = Cells[new Point(9, 5)];
-			Cells[new Point(9, 5)].Neighbour = Cells[new Point(9, 7)];
-			Cells[new Point(9, 7)].Neighbour = Cells[new Point(10, 7)];
-			Cells[new Point(10, 7)].Neighbour = Cells[new Point(10, 10)];
-			Cells[new Point(10, 10)].Neighbour = Cells[new Point(15, 10)];
-			#endregion
+			if (screen == 1)
+			{
+				#region Map_01
+				Cells[new Point(0, 1)].Neighbour = Cells[new Point(12, 1)];
+				Cells[new Point(12, 1)].Neighbour = Cells[new Point(12, 2)];
+				Cells[new Point(12, 2)].Neighbour = Cells[new Point(13, 2)];
+				Cells[new Point(13, 2)].Neighbour = Cells[new Point(13, 5)];
+				Cells[new Point(13, 5)].Neighbour = Cells[new Point(1, 5)];
+				Cells[new Point(1, 5)].Neighbour = Cells[new Point(1, 9)];
+				Cells[new Point(1, 9)].Neighbour = Cells[new Point(2, 9)];
+				Cells[new Point(2, 9)].Neighbour = Cells[new Point(2, 10)];
+				Cells[new Point(2, 10)].Neighbour = Cells[new Point(15, 10)];
+				#endregion
+			}
+			else if (screen == 2)
+			{
+				#region Map_02
+				Cells[new Point(1, 0)].Neighbour = Cells[new Point(1, 10)];
+				Cells[new Point(1, 10)].Neighbour = Cells[new Point(5, 10)];
+				Cells[new Point(5, 10)].Neighbour = Cells[new Point(5, 2)];
+				Cells[new Point(5, 2)].Neighbour = Cells[new Point(12, 2)];
+				Cells[new Point(12, 2)].Neighbour = Cells[new Point(12, 3)];
+				Cells[new Point(12, 3)].Neighbour = Cells[new Point(13, 3)];
+				Cells[new Point(13, 3)].Neighbour = Cells[new Point(13, 6)];
+				Cells[new Point(13, 6)].Neighbour = Cells[new Point(8, 6)];
+				Cells[new Point(8, 6)].Neighbour = Cells[new Point(8, 10)];
+				Cells[new Point(8, 10)].Neighbour = Cells[new Point(13, 10)];
+				Cells[new Point(13, 10)].Neighbour = Cells[new Point(13, 11)];
+				#endregion
+			}
+			else if (screen == 3)
+			{
+				#region Map_03
+				Cells[new Point(13, 2)].Neighbour = Cells[new Point(10, 2)];
+				Cells[new Point(10, 2)].Neighbour = Cells[new Point(10, 1)];
+				Cells[new Point(10, 1)].Neighbour = Cells[new Point(2, 1)];
+				Cells[new Point(2, 1)].Neighbour = Cells[new Point(2, 5)];
+				Cells[new Point(2, 5)].Neighbour = Cells[new Point(1, 5)];
+				Cells[new Point(1, 5)].Neighbour = Cells[new Point(1, 8)];
+				Cells[new Point(1, 8)].Neighbour = Cells[new Point(2, 8)];
+				Cells[new Point(2, 8)].Neighbour = Cells[new Point(2, 10)];
+				Cells[new Point(2, 10)].Neighbour = Cells[new Point(5, 10)];
+				Cells[new Point(5, 10)].Neighbour = Cells[new Point(5, 5)];
+				Cells[new Point(5, 5)].Neighbour = Cells[new Point(9, 5)];
+				Cells[new Point(9, 5)].Neighbour = Cells[new Point(9, 7)];
+				Cells[new Point(9, 7)].Neighbour = Cells[new Point(10, 7)];
+				Cells[new Point(10, 7)].Neighbour = Cells[new Point(10, 10)];
+				Cells[new Point(10, 10)].Neighbour = Cells[new Point(15, 10)];
+				#endregion
+			}
 		}
 	}
 }

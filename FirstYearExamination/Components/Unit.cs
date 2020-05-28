@@ -14,6 +14,11 @@ namespace FirstYearExamination.Components
 		protected float speed;
 		protected Vector2 velocity;
 		private Cell currentCell;
+		private int screenInt;
+
+		private int unitHealth = 30;
+		private int unitDamage = 10;
+		private int moneyDrop = 5;
 
 		public Unit(float _speed)
 		{
@@ -24,11 +29,11 @@ namespace FirstYearExamination.Components
 		{
 			GameObject.Tag = "Unit";
 			//Map_01 Spawn Position
-			//GameObject.Transform.Position = new Vector2(-64, 64);
+			GameObject.Transform.Position = new Vector2(-64, 64);
 			//Map_02 Spawn Position
 			//GameObject.Transform.Position = new Vector2(64, -64);
 			//Map_03 Spawn Position
-			GameObject.Transform.Position = new Vector2(832, -64);
+			//GameObject.Transform.Position = new Vector2(832, -64);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -39,7 +44,10 @@ namespace FirstYearExamination.Components
 
 		public override void Destroy()
 		{
-
+			if(unitHealth >= 0)
+			{
+				UnitPool.Instance.ReleaseObject(GameObject);
+			}
 		}
 
 		public override string ToString()
