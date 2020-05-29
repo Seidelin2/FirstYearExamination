@@ -29,9 +29,9 @@ namespace FirstYearExamination.Levels
             //Set mouse cursor to visible.
             ScreenManager.IsMouseVisible = true;
 
+            base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
 			GameWorld.Instance.UnitPath(1);
-            base.LoadContent();
 		}
 
 		public override void UnloadContent()
