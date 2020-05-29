@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FirstYearExamination.ObjectPool;
+using FirstYearExamination.Static_Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,15 +15,24 @@ namespace FirstYearExamination.Components
 		protected float speed;
 		protected Vector2 velocity;
 		private Cell currentCell;
-		private int screenInt;
+		private Texture2D fgSprite { get; set; }
+		private Texture2D bgSprite { get; set; }
+		private Vector2 fgHealthOrigin;
+		private Vector2 bgHealthOrigin;
 
-		private int unitHealth = 30;
+		protected int maxHealth = 30;
+		protected int unitHealth = 30;
+		protected float healthPercentage { get { return (float)unitHealth / (float)maxHealth; } }
 		private int unitDamage = 10;
 		private int moneyDrop = 5;
 
 		public Unit(float _speed)
 		{
 			this.speed = _speed;
+			bgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Black);
+			fgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Lime);
+			bgHealthOrigin = new Vector2(healthPercentage / 2, healthPercentage / 2);
+			fgHealthOrigin = new Vector2(healthPercentage / 2, healthPercentage / 2 + 0.125f);
 		}
 
 		public override void Awake()
@@ -40,6 +50,16 @@ namespace FirstYearExamination.Components
 		{
 			Move();
 			CheckBounds();
+		}
+
+		public override void Draw(SpriteBatch spriteBatch)
+		{
+			spriteBatch.Draw(bgSprite, new Rectangle((int)GameObject.Transform.Position.X + 32,
+				(int)GameObject.Transform.Position.Y + 8, 48, 8), null, Color.White, 0, 
+				bgHealthOrigin, SpriteEffects.None, 0.9f);
+			spriteBatch.Draw(fgSprite, new Rectangle((int)GameObject.Transform.Position.X + 32,
+				(int)GameObject.Transform.Position.Y + 9, (int)(healthPercentage * 46), 6), null, Color.White, 0,
+				fgHealthOrigin, SpriteEffects.None, 0.95f);
 		}
 
 		public override void Destroy()
