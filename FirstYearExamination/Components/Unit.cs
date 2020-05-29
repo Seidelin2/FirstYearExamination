@@ -31,8 +31,6 @@ namespace FirstYearExamination.Components
 			this.speed = _speed;
 			bgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Black);
 			fgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Lime);
-			bgHealthOrigin = new Vector2(healthPercentage / 2, healthPercentage / 2);
-			fgHealthOrigin = new Vector2(healthPercentage / 2, healthPercentage / 2 + 0.125f);
 		}
 
 		public override void Awake()
@@ -54,10 +52,10 @@ namespace FirstYearExamination.Components
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(bgSprite, new Rectangle((int)GameObject.Transform.Position.X + 32,
+			spriteBatch.Draw(bgSprite, new Rectangle((int)GameObject.Transform.Position.X + 8,
 				(int)GameObject.Transform.Position.Y + 8, 48, 8), null, Color.White, 0, 
 				bgHealthOrigin, SpriteEffects.None, 0.9f);
-			spriteBatch.Draw(fgSprite, new Rectangle((int)GameObject.Transform.Position.X + 32,
+			spriteBatch.Draw(fgSprite, new Rectangle((int)GameObject.Transform.Position.X + 9,
 				(int)GameObject.Transform.Position.Y + 9, (int)(healthPercentage * 46), 6), null, Color.White, 0,
 				fgHealthOrigin, SpriteEffects.None, 0.95f);
 		}
