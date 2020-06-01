@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FirstYearExamination.Components;
+using FirstYearExamination.Tower;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -23,7 +25,10 @@ namespace FirstYearExamination.Screens
         /// </summary>
         public SplashScreen(GameWorld gameWorld) : base(gameWorld)
         {
-            
+            New_Tower tmp1= nicolaiTest(new Vector2(100,100));
+            New_Tower tmp2= nicolaiTest(new Vector2(300,300));
+            tmp1.Target = tmp2.GameObject;
+            //tmp2.Target = tmp1.GameObject;
         }
 
         public override void LoadContent()
@@ -58,6 +63,23 @@ namespace FirstYearExamination.Screens
             }
 
             previousKS = newKS;
+        }
+
+        public New_Tower nicolaiTest(Vector2 pos)
+        {
+            GameObject go = new GameObject();
+            SpriteRenderer sr = new SpriteRenderer();
+            New_Tower tower = new New_Tower(1, 500, 1, 40 ,5 , "hello", ProjectileType.Bigmissile);
+
+            sr.SetSprite("Sprites/Towers/Tower_Holder1");
+            sr.SetOrigin();
+            go.Transform.Position = pos;
+
+            go.AddComponent(sr);
+            go.AddComponent(tower);
+
+            GameWorld.Instance.AddGameObject(go);
+            return tower;
         }
     }
 }

@@ -13,17 +13,18 @@ namespace FirstYearExamination.Tower
     {
 
         int damage;
-        int range;
         int projectileSpeed;
         string name;
         GameObject target;
+        SpriteRenderer sr;
 
-        public Projectile(int damage, int range, int projectileSpeed, string name)
+        public Projectile(int damage, int projectileSpeed, string names)
         {
             this.damage = damage;
-            this.range = range;
             this.projectileSpeed = projectileSpeed;
             this.name = name;
+
+
         }
 
         public override void Awake()
@@ -36,24 +37,60 @@ namespace FirstYearExamination.Tower
             base.Destroy();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
-        }
-
         public override void Start()
         {
             base.Start();
+            sr = (SpriteRenderer)GameObject.GetComponent("SpriteRenderer");
         }
 
         public override void Update(GameTime gameTime)
         {
+            MoveToTarget(gameTime);
             base.Update(gameTime);
+        }
+
+        private void MoveToTarget(GameTime gameTime)
+        {
+            if (target == null)
+            {
+                Death();
+            }
+            else if (Vector2.Distance(target.Transform.Position, GameObject.Transform.Position) <= 5)
+            {
+                //TODO : do damage to the unit
+                Death();
+            }
+            else
+            {
+                Vector2 targetPosition = target.Transform.Position;
+                Vector2 myPosition = GameObject.Transform.Position;
+                Vector2 direction = Vector2.Normalize(targetPosition - myPosition);
+
+
+                GameObject.Transform.Position += direction * projectileSpeed * GameWorld.DeltaTime;
+                LookAtTarget();
+            }
+        }
+
+        public void SetTarget(GameObject target)
+        {
+            this.target = target;
+        }
+
+        public void SpawnPostition(Vector2 pos)
+        {
+            GameObject.Transform.Position = pos;
+        }
+
+        private void Death()
+        {
+            GameWorld.Instance.RemoveGameObject(GameObject);
+        }
+
+        private void LookAtTarget()
+        {
+           float rotation = Helper.CalculateAngleBetweenPositions(GameObject.Transform.Position, target.Transform.Position);
+            sr.Rotation = rotation +90; 
         }
     }
 }

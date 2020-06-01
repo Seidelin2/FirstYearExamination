@@ -30,7 +30,14 @@ namespace FirstYearExamination
 
 		public Component GetComponent(string component)
 		{
-			return components[component];
+			if (components.Keys.Contains(component))
+            {
+				return components[component];
+            }
+			else
+            {
+				return null;
+            }
 		}
 
 		public void Awake()

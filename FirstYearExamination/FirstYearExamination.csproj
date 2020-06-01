@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D0D77787-C7AD-411C-8BC4-5C30617FF51E}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FirstYearExamination</RootNamespace>
     <AssemblyName>FirstYearExamination</AssemblyName>
@@ -40,6 +40,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Cell\Cell.cs" />
     <Compile Include="Components\Collider.cs" />
@@ -48,6 +51,7 @@
     <Compile Include="Components\Player.cs" />
     <Compile Include="Components\Unit.cs" />
     <Compile Include="Factory\Factory.cs" />
+    <Compile Include="Factory\ProjectileFactory.cs" />
     <Compile Include="Factory\UnitFactory.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
@@ -69,6 +73,9 @@
     <Compile Include="Screens\SplashScreen.cs" />
     <Compile Include="Screens\TitleScreen.cs" />
     <Compile Include="Static Components\TextureHelper.cs" />
+    <Compile Include="Tower\Projectile.cs" />
+    <Compile Include="Tower\New_Tower.cs" />
+    <Compile Include="Tower\ProjectileType.cs" />
     <Compile Include="Transform.cs" />
   </ItemGroup>
   <ItemGroup>

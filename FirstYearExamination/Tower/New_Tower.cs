@@ -1,4 +1,6 @@
 ﻿using FirstYearExamination.Components;
+using FirstYearExamination.Factory;
+using FirstYearExamination.Tower;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,12 +16,17 @@ namespace FirstYearExamination
         int damage;
         int range;
         int fireRate;
+        float currentFireRate;
         int projectileSpeed;
         int cost;
         string name;
         GameObject target;
 
-        public New_Tower (int damage, int range, int fireRate, int projectileSpeed, int cost, string name)
+        ProjectileType projectiletype;
+
+        public GameObject Target { get => target; set => target = value; }
+
+        public New_Tower (int damage, int range, int fireRate, int projectileSpeed, int cost, string name, ProjectileType projectileType)
         {
             this.damage = damage;
             this.range = range;
@@ -27,6 +34,7 @@ namespace FirstYearExamination
             this.projectileSpeed = projectileSpeed;
             this.cost = cost;
             this.name = name;
+            this.projectiletype = projectileType;
         }
 
         public override void Awake()
@@ -39,16 +47,6 @@ namespace FirstYearExamination
             base.Destroy();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
-        }
-
         public override void Start()
         {
             base.Start();
@@ -57,6 +55,42 @@ namespace FirstYearExamination
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            TowerFire();
+        }
+
+        public void FindTarget()
+        {
+            //TODO find target 
+        }
+
+        public void TowerFire()
+        {
+            if (target == null)
+            {
+                FindTarget();
+            }
+            else if (Vector2.Distance(target.Transform.Position, GameObject.Transform.Position) > range)
+            {
+                FindTarget();
+            }
+            else
+            {
+                if (currentFireRate <= 0)
+                {
+                    Shoot();
+                }
+                else
+                {
+                    currentFireRate -= GameWorld.DeltaTime;
+                }
+            }
+        }
+
+        public void Shoot()
+        {
+            currentFireRate = fireRate;
+            GameObject go = ProjectileFactory.Instance.Create(projectiletype, target, GameObject.Transform.Position);
+            GameWorld.Instance.AddGameObject(go);
         }
     }
 }
