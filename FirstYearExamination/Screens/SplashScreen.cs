@@ -46,8 +46,6 @@ namespace FirstYearExamination.Screens
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-
-
         }
 
         public void HandleInput()

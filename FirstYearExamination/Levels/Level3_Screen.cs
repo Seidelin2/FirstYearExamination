@@ -16,10 +16,8 @@ namespace FirstYearExamination.Levels
         private KeyboardState previousKS = Keyboard.GetState();
         private KeyboardState newKS;
 
-
         private Texture2D background;
         private string path = "Sprites/Map/Map_3";
-
 
         public Level3_Screen(GameWorld gameWorld) : base(gameWorld)
         {
@@ -34,7 +32,8 @@ namespace FirstYearExamination.Levels
 
             base.LoadContent();
             background = gameScreenContent.Load<Texture2D>(path);
-        }
+			GameWorld.Instance.UnitPath(3);
+		}
 
         public override void UnloadContent()
         {
@@ -43,12 +42,12 @@ namespace FirstYearExamination.Levels
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             HandleInput();
+			GameWorld.Instance.SpawnUnit(3);
+            base.Update(gameTime);
+		}
 
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+		public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
 

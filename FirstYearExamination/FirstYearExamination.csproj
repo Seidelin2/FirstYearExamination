@@ -68,6 +68,7 @@
     <Compile Include="ScreenManager.cs" />
     <Compile Include="Screens\SplashScreen.cs" />
     <Compile Include="Screens\TitleScreen.cs" />
+    <Compile Include="Static Components\TextureHelper.cs" />
     <Compile Include="Transform.cs" />
   </ItemGroup>
   <ItemGroup>
