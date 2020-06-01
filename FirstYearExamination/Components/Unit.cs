@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FirstYearExamination.ObjectPool;
-using FirstYearExamination.Static_Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -29,8 +28,8 @@ namespace FirstYearExamination.Components
 		public Unit(float _speed)
 		{
 			this.speed = _speed;
-			bgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Black);
-			fgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Lime);
+			bgSprite = Helper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Black);
+			fgSprite = Helper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Lime);
 		}
 
 		public override void Awake()
@@ -73,9 +72,9 @@ namespace FirstYearExamination.Components
 			return "Unit";
 		}
 
-		public void SetWaypoint(Cell _distination)
+		public void SetWaypoint(Cell _destination)
 		{
-			currentCell = _distination;
+			currentCell = _destination;
 
 			velocity = currentCell.WorldPos - GameObject.Transform.Position;
 			velocity = Vector2.Normalize(velocity);
