@@ -207,16 +207,22 @@ namespace FirstYearExamination
 				unit = (Unit)go.GetComponent("Unit");
 				if(screen == 1)
 				{
+					//Spawn Position 1
+					go.Transform.Position = new Vector2(-64, 64);
 					//Map_01 New Neighbour/Waypoint
 					unit.SetWaypoint(Cells[new Point(0, 1)]);
 				}
 				else if (screen == 2)
 				{
+					//Spawn Position 2
+					go.Transform.Position = new Vector2(64, -64);
 					//Map_02 New Neighbour/Waypoint
 					unit.SetWaypoint(Cells[new Point(1, 0)]);
 				}
 				else if (screen == 3)
 				{
+					//Spawn Position 3
+					go.Transform.Position = new Vector2(832, -64);
 					//Map_03 New Neighbour/Waypoint
 					unit.SetWaypoint(Cells[new Point(13, 2)]);
 				}
@@ -238,6 +244,7 @@ namespace FirstYearExamination
 				Cells[new Point(1, 9)].Neighbour = Cells[new Point(2, 9)];
 				Cells[new Point(2, 9)].Neighbour = Cells[new Point(2, 10)];
 				Cells[new Point(2, 10)].Neighbour = Cells[new Point(15, 10)];
+				Cells[new Point(15, 10)].Neighbour = Cells[new Point(15, 11)];
 				#endregion
 			}
 			else if (screen == 2)
@@ -254,6 +261,7 @@ namespace FirstYearExamination
 				Cells[new Point(8, 6)].Neighbour = Cells[new Point(8, 10)];
 				Cells[new Point(8, 10)].Neighbour = Cells[new Point(13, 10)];
 				Cells[new Point(13, 10)].Neighbour = Cells[new Point(13, 11)];
+				Cells[new Point(13, 11)].Neighbour = Cells[new Point(14, 11)];
 				#endregion
 			}
 			else if (screen == 3)
@@ -274,6 +282,7 @@ namespace FirstYearExamination
 				Cells[new Point(9, 7)].Neighbour = Cells[new Point(10, 7)];
 				Cells[new Point(10, 7)].Neighbour = Cells[new Point(10, 10)];
 				Cells[new Point(10, 10)].Neighbour = Cells[new Point(15, 10)];
+				Cells[new Point(15, 10)].Neighbour = Cells[new Point(15, 11)];
 				#endregion
 			}
 		}

@@ -35,18 +35,13 @@ namespace FirstYearExamination.Components
 		public override void Awake()
 		{
 			GameObject.Tag = "Unit";
-			//Map_01 Spawn Position
-			GameObject.Transform.Position = new Vector2(-64, 64);
-			//Map_02 Spawn Position
-			//GameObject.Transform.Position = new Vector2(64, -64);
-			//Map_03 Spawn Position
-			//GameObject.Transform.Position = new Vector2(832, -64);
 		}
 
 		public override void Update(GameTime gameTime)
 		{
 			Move();
 			CheckBounds();
+			Destroy();
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
@@ -61,7 +56,11 @@ namespace FirstYearExamination.Components
 
 		public override void Destroy()
 		{
-			if(unitHealth >= 0)
+			if(unitHealth <= 0)
+			{
+				UnitPool.Instance.ReleaseObject(GameObject);
+			}
+			else if (currentCell.Neighbour == null)
 			{
 				UnitPool.Instance.ReleaseObject(GameObject);
 			}
