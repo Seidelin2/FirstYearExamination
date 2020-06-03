@@ -39,7 +39,15 @@ namespace FirstYearExamination.GUI
 
 		public virtual void LoadContent()
 		{
-            var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
+			var waveButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
+			{
+				Position = new Vector2(950, 96),
+				Text = "Next Wave",
+			};
+
+			waveButton.Click += WaveButton_Click;
+
+			var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
             {
                 Position = new Vector2(950, 176),
                 Text = "Random",
@@ -59,6 +67,7 @@ namespace FirstYearExamination.GUI
             {
                 randomButton,
                 quitButton,
+				waveButton,
             };
         }
 
@@ -89,5 +98,10 @@ namespace FirstYearExamination.GUI
 
             gameScreen.gameWorld.backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
         }
-    }
+
+		private void WaveButton_Click(object sender, EventArgs e)
+		{
+			gameScreen.gameWorld.waveController.NextWave();
+		}
+	}
 }

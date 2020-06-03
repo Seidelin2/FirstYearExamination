@@ -28,8 +28,10 @@ namespace FirstYearExamination.Components
 
 		public void LoadContent(ContentManager content)
 		{
+			//Bruger texturet i mappen til at loade ind
 			cellTexture = content.Load<Texture2D>("Sprites/Map/Cell_Texture");
 
+			//Placere hvert cell med texture i grid positionen på banen
 			worldPos = new Vector2(gridPos.X * cellTexture.Width, gridPos.Y * cellTexture.Height);
 		}
 

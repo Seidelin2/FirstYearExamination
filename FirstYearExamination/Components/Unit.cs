@@ -22,7 +22,6 @@ namespace FirstYearExamination.Components
 		protected int maxHealth = 30;
 		protected int unitHealth = 30;
 		protected float healthPercentage { get { return (float)unitHealth / (float)maxHealth; } }
-		private int unitDamage = 10;
 		private int moneyDrop = 5;
 
 		public Unit(float _speed)
@@ -46,9 +45,11 @@ namespace FirstYearExamination.Components
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
+			//Background linje for Health
 			spriteBatch.Draw(bgSprite, new Rectangle((int)GameObject.Transform.Position.X + 8,
 				(int)GameObject.Transform.Position.Y + 8, 48, 8), null, Color.White, 0, 
 				bgHealthOrigin, SpriteEffects.None, 0.9f);
+			//Foreground linje for Health som ændres baseret på hvor meget Health der er
 			spriteBatch.Draw(fgSprite, new Rectangle((int)GameObject.Transform.Position.X + 9,
 				(int)GameObject.Transform.Position.Y + 9, (int)(healthPercentage * 46), 6), null, Color.White, 0,
 				fgHealthOrigin, SpriteEffects.None, 0.95f);
@@ -81,6 +82,7 @@ namespace FirstYearExamination.Components
 
 		private void Move()
 		{
+			//Bevæger Unit baseret på positionen af Unit og den destination den skal hen mod
 			if(Vector2.Distance(GameObject.Transform.Position, currentCell.WorldPos) > 1)
 			{
 				GameObject.Transform.Translate(velocity * speed * GameWorld.DeltaTime);

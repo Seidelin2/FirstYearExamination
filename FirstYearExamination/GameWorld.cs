@@ -35,6 +35,7 @@ namespace FirstYearExamination
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 		Unit unit;
+		public WaveController waveController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
 		public List<Collider> Colliders { get; set; } = new List<Collider>();
@@ -82,6 +83,8 @@ namespace FirstYearExamination
 					Cells.Add(new Point(x, y), new Cell(new Point(x, y)));
 				}
 			}
+
+			waveController = new WaveController();
 
 			base.Initialize();
         }
@@ -202,29 +205,33 @@ namespace FirstYearExamination
 
 			if (unitSpawnTime >= UnitCoolDown)
 			{
-				GameObject go = UnitPool.Instance.GetObject();
-				AddGameObject(go);
-				unit = (Unit)go.GetComponent("Unit");
-				if(screen == 1)
+				//GameObject go = UnitPool.Instance.GetObject();
+				GameObject go = waveController.GetNextGameObject();
+				if(go != null)
 				{
-					//Spawn Position 1
-					go.Transform.Position = new Vector2(-64, 64);
-					//Map_01 New Neighbour/Waypoint
-					unit.SetWaypoint(Cells[new Point(0, 1)]);
-				}
-				else if (screen == 2)
-				{
-					//Spawn Position 2
-					go.Transform.Position = new Vector2(64, -64);
-					//Map_02 New Neighbour/Waypoint
-					unit.SetWaypoint(Cells[new Point(1, 0)]);
-				}
-				else if (screen == 3)
-				{
-					//Spawn Position 3
-					go.Transform.Position = new Vector2(832, -64);
-					//Map_03 New Neighbour/Waypoint
-					unit.SetWaypoint(Cells[new Point(13, 2)]);
+					AddGameObject(go);
+					unit = (Unit)go.GetComponent("Unit");
+					if (screen == 1)
+					{
+						//Spawn Position 1
+						go.Transform.Position = new Vector2(-64, 64);
+						//Map_01 New Neighbour/Waypoint
+						unit.SetWaypoint(Cells[new Point(0, 1)]);
+					}
+					else if (screen == 2)
+					{
+						//Spawn Position 2
+						go.Transform.Position = new Vector2(64, -64);
+						//Map_02 New Neighbour/Waypoint
+						unit.SetWaypoint(Cells[new Point(1, 0)]);
+					}
+					else if (screen == 3)
+					{
+						//Spawn Position 3
+						go.Transform.Position = new Vector2(832, -64);
+						//Map_03 New Neighbour/Waypoint
+						unit.SetWaypoint(Cells[new Point(13, 2)]);
+					}
 				}
 				unitSpawnTime = 0;
 			}
