@@ -18,7 +18,11 @@ namespace FirstYearExamination.GUI
 
         private readonly GameScreen gameScreen;
 
-        public GUIManager(GameScreen gameScreen)
+		private GUIText gold;
+
+		public GUIText GoldText { get => gold; set => gold = value; }
+
+		public GUIManager(GameScreen gameScreen)
         {
             this.gameScreen = gameScreen;
         }
@@ -41,7 +45,7 @@ namespace FirstYearExamination.GUI
 		{
 			var waveButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
 			{
-				Position = new Vector2(950, 96),
+				Position = new Vector2(935, 176),
 				Text = "Next Wave",
 			};
 
@@ -49,7 +53,7 @@ namespace FirstYearExamination.GUI
 
 			var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
             {
-                Position = new Vector2(950, 176),
+                Position = new Vector2(935, 96),
                 Text = "Random",
             };
 
@@ -57,9 +61,15 @@ namespace FirstYearExamination.GUI
 
             var quitButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Quit"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(950, 256),
+                Position = new Vector2(935, 256),
                 Text = "Quit",
             };
+
+			GoldText = new GUIText(gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
+			{
+				Position = new Vector2(0, 650),
+				Text = "Gold: X",
+			};
 
             quitButton.Click += QuitButton_Click;
 
@@ -68,6 +78,7 @@ namespace FirstYearExamination.GUI
                 randomButton,
                 quitButton,
 				waveButton,
+				GoldText,
             };
         }
 

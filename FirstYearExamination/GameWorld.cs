@@ -3,6 +3,7 @@ using FirstYearExamination.Gui;
 using FirstYearExamination.GUI;
 using FirstYearExamination.ObjectPool;
 using FirstYearExamination.Screens;
+using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -87,6 +88,8 @@ namespace FirstYearExamination
 			waveController = new WaveController();
 
 			base.Initialize();
+			SQLiteDatabase sqliteDB = new SQLiteDatabase();
+			sqliteDB.RunSQLite();
         }
 
         /// <summary>
@@ -199,7 +202,7 @@ namespace FirstYearExamination
 			gameObjects.Remove(go);
 		}
 
-		public void SpawnUnit(int screen)
+		public void SpawnUnit(int screen, GoldUpdater goldUpdater)
 		{
 			unitSpawnTime += DeltaTime;
 
@@ -211,6 +214,7 @@ namespace FirstYearExamination
 				{
 					AddGameObject(go);
 					unit = (Unit)go.GetComponent("Unit");
+					unit.goldUpdater = goldUpdater;
 					if (screen == 1)
 					{
 						//Spawn Position 1

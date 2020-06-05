@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FirstYearExamination.ObjectPool;
+using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -21,8 +22,10 @@ namespace FirstYearExamination.Components
 
 		protected int maxHealth = 30;
 		protected int unitHealth = 30;
+		protected int goldAmount = 10;
 		protected float healthPercentage { get { return (float)unitHealth / (float)maxHealth; } }
-		private int moneyDrop = 5;
+
+		public GoldUpdater goldUpdater { get; set; }
 
 		public Unit(float _speed)
 		{
@@ -59,6 +62,7 @@ namespace FirstYearExamination.Components
 		{
 			if(unitHealth <= 0)
 			{
+				goldUpdater.UpdateGold(goldAmount);
 				UnitPool.Instance.ReleaseObject(GameObject);
 			}
 			else if (currentCell.Neighbour == null)
