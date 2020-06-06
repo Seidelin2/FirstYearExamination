@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FirstYearExamination.ObjectPool;
-using FirstYearExamination.Static_Components;
+using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -22,39 +22,37 @@ namespace FirstYearExamination.Components
 
 		protected int maxHealth = 30;
 		protected int unitHealth = 30;
+		protected int goldAmount = 10;
 		protected float healthPercentage { get { return (float)unitHealth / (float)maxHealth; } }
-		private int unitDamage = 10;
-		private int moneyDrop = 5;
+
+		public GoldUpdater goldUpdater { get; set; }
 
 		public Unit(float _speed)
 		{
 			this.speed = _speed;
-			bgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Black);
-			fgSprite = TextureHelper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Lime);
+			bgSprite = Helper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Black);
+			fgSprite = Helper.CreateTexture(GameWorld.Instance.GraphicsDevice, 1, 1, pixel => Color.Lime);
 		}
 
 		public override void Awake()
 		{
 			GameObject.Tag = "Unit";
-			//Map_01 Spawn Position
-			GameObject.Transform.Position = new Vector2(-64, 64);
-			//Map_02 Spawn Position
-			//GameObject.Transform.Position = new Vector2(64, -64);
-			//Map_03 Spawn Position
-			//GameObject.Transform.Position = new Vector2(832, -64);
 		}
 
 		public override void Update(GameTime gameTime)
 		{
 			Move();
 			CheckBounds();
+			Destroy();
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
+			//Background linje for Health
 			spriteBatch.Draw(bgSprite, new Rectangle((int)GameObject.Transform.Position.X + 8,
 				(int)GameObject.Transform.Position.Y + 8, 48, 8), null, Color.White, 0, 
 				bgHealthOrigin, SpriteEffects.None, 0.9f);
+			//Foreground linje for Health som ændres baseret på hvor meget Health der er
 			spriteBatch.Draw(fgSprite, new Rectangle((int)GameObject.Transform.Position.X + 9,
 				(int)GameObject.Transform.Position.Y + 9, (int)(healthPercentage * 46), 6), null, Color.White, 0,
 				fgHealthOrigin, SpriteEffects.None, 0.95f);
@@ -62,7 +60,12 @@ namespace FirstYearExamination.Components
 
 		public override void Destroy()
 		{
-			if(unitHealth >= 0)
+			if(unitHealth <= 0)
+			{
+				goldUpdater.UpdateGold(goldAmount);
+				UnitPool.Instance.ReleaseObject(GameObject);
+			}
+			else if (currentCell.Neighbour == null)
 			{
 				UnitPool.Instance.ReleaseObject(GameObject);
 			}
@@ -73,9 +76,9 @@ namespace FirstYearExamination.Components
 			return "Unit";
 		}
 
-		public void SetWaypoint(Cell _distination)
+		public void SetWaypoint(Cell _destination)
 		{
-			currentCell = _distination;
+			currentCell = _destination;
 
 			velocity = currentCell.WorldPos - GameObject.Transform.Position;
 			velocity = Vector2.Normalize(velocity);
@@ -83,6 +86,7 @@ namespace FirstYearExamination.Components
 
 		private void Move()
 		{
+			//Bevæger Unit baseret på positionen af Unit og den destination den skal hen mod
 			if(Vector2.Distance(GameObject.Transform.Position, currentCell.WorldPos) > 1)
 			{
 				GameObject.Transform.Translate(velocity * speed * GameWorld.DeltaTime);

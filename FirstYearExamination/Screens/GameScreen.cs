@@ -1,7 +1,9 @@
 ﻿using FirstYearExamination.GUI;
+using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,13 @@ namespace FirstYearExamination.Screens
 {
     public abstract class GameScreen
     {
+		private bool startOnce = true;
+
         //Local ContentManager, unique to each GameScreen object, that handles its content.
         public ContentManager gameScreenContent;
-        private GUIManager guiManager;
+        protected GUIManager guiManager;
         public GameWorld gameWorld;
+		public GoldUpdater goldUpdater;
 
         public GameScreen(GameWorld gameWorld)
         {
@@ -41,7 +46,12 @@ namespace FirstYearExamination.Screens
 
         public virtual void Update(GameTime gameTime)
         {
-            guiManager.Update(gameTime);
+			if(startOnce == true)
+			{
+				startOnce = false;
+				Start();
+			}
+			guiManager.Update(gameTime);
         }
 
 
@@ -49,5 +59,10 @@ namespace FirstYearExamination.Screens
         {
             guiManager.Draw(spriteBatch, gameTime);
         }
+
+		public virtual void Start()
+		{
+
+		}
     }
 }

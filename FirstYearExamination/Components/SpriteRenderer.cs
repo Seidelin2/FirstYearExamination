@@ -14,6 +14,8 @@ namespace FirstYearExamination.Components
 
 		public Vector2 Origin { get; set; }
 
+		public float Rotation { get; set; }
+
 		public SpriteRenderer()
 		{
 
@@ -32,12 +34,11 @@ namespace FirstYearExamination.Components
 		public void SetSprite(string spriteName)
 		{
 			Sprite = GameWorld.Instance.Content.Load<Texture2D>(spriteName);
-
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, 0, Origin, 1, SpriteEffects.None, 0.5f);
+			spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, Rotation, Origin, 1, SpriteEffects.None, 0.5f);
 		}
 
 		public override string ToString()

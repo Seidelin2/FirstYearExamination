@@ -21,7 +21,5 @@ namespace FirstYearExamination
             texture.SetData(data);
             return texture;
         }
-
-
     }
 }

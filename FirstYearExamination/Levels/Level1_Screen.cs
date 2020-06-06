@@ -1,4 +1,5 @@
 ﻿using FirstYearExamination.Screens;
+using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,7 +23,7 @@ namespace FirstYearExamination.Levels
 		public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
         {
 
-        }
+		}
 
 		public override void LoadContent()
         {
@@ -41,9 +42,17 @@ namespace FirstYearExamination.Levels
 
         public override void Update(GameTime gameTime)
         {
+			base.Update(gameTime);
+
             HandleInput();
-			GameWorld.Instance.SpawnUnit(1);
-            base.Update(gameTime);
+			GameWorld.Instance.SpawnUnit(1, goldUpdater);
+
+			MouseState state = Mouse.GetState();
+
+			if (state.RightButton == ButtonState.Pressed)
+			{
+				goldUpdater.UpdateGold(10);
+			}
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -53,11 +62,18 @@ namespace FirstYearExamination.Levels
             base.Draw(spriteBatch, gameTime);
         }
 
-        /// <summary>
-        /// HandleInput is just for testing purposes
-        /// To see if we are able to switch between screens
-        /// </summary>
-        public void HandleInput()
+		public override void Start()
+		{
+			base.Start();
+			goldUpdater = new GoldUpdater(guiManager.GoldText);
+			goldUpdater.ResetGold();
+		}
+
+		/// <summary>
+		/// HandleInput is just for testing purposes
+		/// To see if we are able to switch between screens
+		/// </summary>
+		public void HandleInput()
         {
             newKS = Keyboard.GetState();
 

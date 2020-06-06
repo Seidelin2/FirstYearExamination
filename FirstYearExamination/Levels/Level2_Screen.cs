@@ -1,4 +1,5 @@
 ﻿using FirstYearExamination.Screens;
+using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -42,9 +43,9 @@ namespace FirstYearExamination.Levels
 
         public override void Update(GameTime gameTime)
         {
-            HandleInput();
-			GameWorld.Instance.SpawnUnit(2);
             base.Update(gameTime);
+            HandleInput();
+			GameWorld.Instance.SpawnUnit(2, goldUpdater);
 		}
 
 		public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -55,7 +56,14 @@ namespace FirstYearExamination.Levels
 
         }
 
-        public void HandleInput()
+		public override void Start()
+		{
+			base.Start();
+			goldUpdater = new GoldUpdater(guiManager.GoldText);
+			goldUpdater.ResetGold();
+		}
+
+		public void HandleInput()
         {
             newKS = Keyboard.GetState();
 
