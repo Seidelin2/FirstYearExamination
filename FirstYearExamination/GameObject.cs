@@ -40,6 +40,26 @@ namespace FirstYearExamination
             }
 		}
 
+		public Component GetComponent <T> ()
+		{
+            foreach (Component item in components.Values)
+            {
+				if (item is T)
+                {
+					return (item);
+                }
+            }
+			return null;
+			//if (components.Values.Contains(component))
+			//{
+			//	return components[component];
+			//}
+			//else
+			//{
+			//	return null;
+			//}
+		}
+
 		public void Awake()
 		{
 			foreach (Component component in components.Values)

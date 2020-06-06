@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Tower
 {
-    public enum ProjectileType
+    public enum TowerType
     {
-        // the 2 projectile types there are ind the game
-        Smallmissile,
-        Bigmissile,
+        Fast_Tower, Slow_Tower, AOE_Tower, MultiTarget_Tower, Random_Fire,
     }
 }

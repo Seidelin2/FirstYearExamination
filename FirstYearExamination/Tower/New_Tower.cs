@@ -13,16 +13,16 @@ namespace FirstYearExamination
 {
     public class New_Tower : Component
     {
-        int damage;
-        int range;
-        int fireRate;
-        float currentFireRate;
-        int projectileSpeed;
-        int cost;
-        string name;
-        GameObject target;
+        protected int damage;
+        protected int range;
+        protected int fireRate;
+        protected float currentFireRate;
+        protected int projectileSpeed;
+        protected  int cost;
+        protected string name;
+        protected GameObject target;
 
-        ProjectileType projectiletype;
+        protected ProjectileType projectiletype;
 
         public GameObject Target { get => target; set => target = value; }
 
@@ -35,6 +35,11 @@ namespace FirstYearExamination
             this.cost = cost;
             this.name = name;
             this.projectiletype = projectileType;
+        }
+
+        public New_Tower ()
+        {
+
         }
 
         public override void Awake()
@@ -89,7 +94,7 @@ namespace FirstYearExamination
         public void Shoot()
         {
             currentFireRate = fireRate;
-            GameObject go = ProjectileFactory.Instance.Create(projectiletype, target, GameObject.Transform.Position);
+            GameObject go = ProjectileFactory.Instance.Create(projectiletype, target, GameObject.Transform.Position, damage, projectileSpeed);
             GameWorld.Instance.AddGameObject(go);
         }
     }

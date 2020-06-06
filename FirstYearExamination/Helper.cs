@@ -10,6 +10,7 @@ namespace FirstYearExamination
 {
     public static class Helper
     {
+		// all this is a math helper, witch is here to ensure that projectile are turned towards the enemy
         public static Texture2D CreateTexture(GraphicsDevice device, int width, int height, Func<int, Color> paint)
         {
             Texture2D texture = new Texture2D(device, width, height);

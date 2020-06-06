@@ -52,6 +52,7 @@
     <Compile Include="Components\Unit.cs" />
     <Compile Include="Factory\Factory.cs" />
     <Compile Include="Factory\ProjectileFactory.cs" />
+    <Compile Include="Factory\TowerFactory.cs" />
     <Compile Include="Factory\UnitFactory.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
@@ -76,6 +77,9 @@
     <Compile Include="Tower\Projectile.cs" />
     <Compile Include="Tower\New_Tower.cs" />
     <Compile Include="Tower\ProjectileType.cs" />
+    <Compile Include="Tower\TowerType.cs" />
+    <Compile Include="Tower\Tower_stats\Fast_Tower.cs" />
+    <Compile Include="Tower\Tower_stats\Slow_Tower.cs" />
     <Compile Include="Transform.cs" />
   </ItemGroup>
   <ItemGroup>

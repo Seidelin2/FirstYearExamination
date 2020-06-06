@@ -49,16 +49,17 @@ namespace FirstYearExamination.Factory
             return go;
         }
 
-        public GameObject Create(ProjectileType type, GameObject target, Vector2 pos)
+        public GameObject Create(ProjectileType type, GameObject target, Vector2 pos, int damage, int speed)
         {
             GameObject go = new GameObject();
             SpriteRenderer sr = new SpriteRenderer();
             Projectile projectile;
 
+            
             switch (type)
             {
                 case ProjectileType.Smallmissile:
-                    projectile = new Projectile(10, 50, "Small missile");
+                    projectile = new Projectile(damage, speed, "Small missile");
                     sr.SetSprite("Sprites/Towers/Small_Missile");
                     sr.SetOrigin();
                     go.AddComponent(sr);
@@ -67,7 +68,7 @@ namespace FirstYearExamination.Factory
                     go.Transform.Position = pos;
                     break;
                 case ProjectileType.Bigmissile:
-                    projectile = new Projectile(20, 50, "Big Missile");
+                    projectile = new Projectile(damage, speed, "Big Missile");
                     sr.SetSprite("Sprites/Towers/Big_Missile");
                     sr.SetOrigin();
                     go.AddComponent(sr);

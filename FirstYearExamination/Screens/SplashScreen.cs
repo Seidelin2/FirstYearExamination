@@ -1,4 +1,5 @@
 ﻿using FirstYearExamination.Components;
+using FirstYearExamination.Factory;
 using FirstYearExamination.Tower;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,8 +26,9 @@ namespace FirstYearExamination.Screens
         /// </summary>
         public SplashScreen(GameWorld gameWorld) : base(gameWorld)
         {
-            New_Tower tmp1= nicolaiTest(new Vector2(100,100));
-            New_Tower tmp2= nicolaiTest(new Vector2(300,300));
+            //tmp tower location, to test if the towers would work, these are just 2 tower placements
+            New_Tower tmp1 = nicolaiTest(new Vector2(100, 100));
+            New_Tower tmp2 = nicolaiTest(new Vector2(300, 300));
             tmp1.Target = tmp2.GameObject;
             //tmp2.Target = tmp1.GameObject;
         }
@@ -67,19 +69,35 @@ namespace FirstYearExamination.Screens
 
         public New_Tower nicolaiTest(Vector2 pos)
         {
-            GameObject go = new GameObject();
-            SpriteRenderer sr = new SpriteRenderer();
-            New_Tower tower = new New_Tower(1, 500, 1, 40 ,5 , "hello", ProjectileType.Bigmissile);
+            //this is the attack part of the test towers, here the stats of the tower are, and the sprite the tower shoots with
+            GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, pos);
+            GameObject go = TowerFactory.Instance.Create(TowerType.Slow_Tower, pos);
+            //SpriteRenderer sr = new SpriteRenderer();
+            //Fast_Tower tower = new Fast_Tower(1, 500, 1, 40 ,5 , "hello", ProjectileType.Bigmissile);
 
-            sr.SetSprite("Sprites/Towers/Tower_Holder1");
-            sr.SetOrigin();
-            go.Transform.Position = pos;
+            //sr.SetSprite("Sprites/Towers/Tower_Holder1");
+            //sr.SetOrigin();
+            //go.Transform.Position = pos;
 
-            go.AddComponent(sr);
-            go.AddComponent(tower);
+            //go.AddComponent(sr);
+            //go.AddComponent(tower);
 
             GameWorld.Instance.AddGameObject(go);
-            return tower;
+
+            Fast_Tower tmp = (Fast_Tower)go.GetComponent<Fast_Tower>();
+            SpriteRenderer tmp1 = (SpriteRenderer)go.GetComponent<SpriteRenderer>();
+
+            return tmp;
+        }
+
+        public void PlaceTower()
+        {
+            //TODO Get cell position 
+            Vector2 cellpostition;
+
+            GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, cellpostition);
+
+            GameWorld.Instance.AddGameObject(go);
         }
     }
 }
