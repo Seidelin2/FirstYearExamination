@@ -42,7 +42,7 @@ namespace FirstYearExamination.Factory
 				case "SoldierB":
 					sr.SetSprite("Sprites/Unit/Unit_SoldierB");
 					go.AddComponent(new Collider(sr));
-					go.AddComponent(new Unit(100));
+					go.AddComponent(new Unit(150));
 					break;
 			}
 

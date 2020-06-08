@@ -18,7 +18,11 @@ namespace FirstYearExamination.GUI
 
         private readonly GameScreen gameScreen;
 
-        public GUIManager(GameScreen gameScreen)
+		private GUIText gold;
+
+		public GUIText GoldText { get => gold; set => gold = value; }
+
+		public GUIManager(GameScreen gameScreen)
         {
             this.gameScreen = gameScreen;
         }
@@ -39,9 +43,17 @@ namespace FirstYearExamination.GUI
 
 		public virtual void LoadContent()
 		{
-            var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
+			var waveButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
+			{
+				Position = new Vector2(935, 176),
+				Text = "Next Wave",
+			};
+
+			waveButton.Click += WaveButton_Click;
+
+			var randomButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
             {
-                Position = new Vector2(950, 176),
+                Position = new Vector2(935, 96),
                 Text = "Random",
             };
 
@@ -49,9 +61,15 @@ namespace FirstYearExamination.GUI
 
             var quitButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Quit"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(950, 256),
+                Position = new Vector2(935, 256),
                 Text = "Quit",
             };
+
+			GoldText = new GUIText(gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
+			{
+				Position = new Vector2(0, 650),
+				Text = "Gold: X",
+			};
 
             quitButton.Click += QuitButton_Click;
 
@@ -59,6 +77,8 @@ namespace FirstYearExamination.GUI
             {
                 randomButton,
                 quitButton,
+				waveButton,
+				GoldText,
             };
         }
 
@@ -89,5 +109,10 @@ namespace FirstYearExamination.GUI
 
             gameScreen.gameWorld.backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
         }
-    }
+
+		private void WaveButton_Click(object sender, EventArgs e)
+		{
+			gameScreen.gameWorld.waveController.NextWave();
+		}
+	}
 }
