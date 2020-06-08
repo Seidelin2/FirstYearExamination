@@ -48,11 +48,11 @@ namespace FirstYearExamination.Components
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			//Background linje for Health
+			//Background line for Health
 			spriteBatch.Draw(bgSprite, new Rectangle((int)GameObject.Transform.Position.X + 8,
 				(int)GameObject.Transform.Position.Y + 8, 48, 8), null, Color.White, 0, 
 				bgHealthOrigin, SpriteEffects.None, 0.9f);
-			//Foreground linje for Health som ændres baseret på hvor meget Health der er
+			//Foreground line for Health that changes based on the amount of Health
 			spriteBatch.Draw(fgSprite, new Rectangle((int)GameObject.Transform.Position.X + 9,
 				(int)GameObject.Transform.Position.Y + 9, (int)(healthPercentage * 46), 6), null, Color.White, 0,
 				fgHealthOrigin, SpriteEffects.None, 0.95f);
@@ -86,7 +86,7 @@ namespace FirstYearExamination.Components
 
 		private void Move()
 		{
-			//Bevæger Unit baseret på positionen af Unit og den destination den skal hen mod
+			//Moves the Unit based on its position and destination
 			if(Vector2.Distance(GameObject.Transform.Position, currentCell.WorldPos) > 1)
 			{
 				GameObject.Transform.Translate(velocity * speed * GameWorld.DeltaTime);

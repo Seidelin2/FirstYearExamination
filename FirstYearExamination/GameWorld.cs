@@ -208,7 +208,6 @@ namespace FirstYearExamination
 
 			if (unitSpawnTime >= UnitCoolDown)
 			{
-				//GameObject go = UnitPool.Instance.GetObject();
 				GameObject go = waveController.GetNextGameObject();
 				if(go != null)
 				{
