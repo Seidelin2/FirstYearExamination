@@ -13,7 +13,7 @@ namespace FirstYearExamination
 	{
 		public Transform Transform { get; private set; }
 
-		private Dictionary<string, Component> components = new Dictionary<string, Component>();
+		public Dictionary<string, Component> components = new Dictionary<string, Component>();
 
 		public string Tag { get; set; }
 

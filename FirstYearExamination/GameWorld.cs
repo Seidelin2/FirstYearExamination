@@ -153,6 +153,7 @@ namespace FirstYearExamination
 					tmpColliders[i].OnCollisionEnter(tmpColliders[j]);
 				}
 			}
+			Console.WriteLine(tmpColliders.Length);
         }
 
         /// <summary>
@@ -199,6 +200,10 @@ namespace FirstYearExamination
 
 		public void RemoveGameObject(GameObject go)
 		{
+    //        foreach (Component item in go.components.Values)
+    //        {
+				//item.Destroy();
+    //        }
 			gameObjects.Remove(go);
 		}
 

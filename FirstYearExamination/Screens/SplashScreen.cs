@@ -27,9 +27,9 @@ namespace FirstYearExamination.Screens
         public SplashScreen(GameWorld gameWorld) : base(gameWorld)
         {
             //tmp tower location, to test if the towers would work, these are just 2 tower placements
-            New_Tower tmp1 = nicolaiTest(new Vector2(200, 100));
-            New_Tower tmp2 = nicolaiTest(new Vector2(300, 400));
-            tmp1.Target = tmp2.GameObject;
+            //New_Tower tmp1 = nicolaiTest(new Vector2(200, 100));
+            //New_Tower tmp2 = nicolaiTest(new Vector2(300, 400));
+            //tmp1.Target = tmp2.GameObject;
             //tmp2.Target = tmp1.GameObject;
         }
 

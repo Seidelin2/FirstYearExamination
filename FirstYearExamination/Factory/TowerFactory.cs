@@ -47,14 +47,24 @@ namespace FirstYearExamination.Factory
                 case TowerType.Fast_Tower:
                     Tower = new Fast_Tower(
                         //damnge, range, firerate, projectilespeed, cost, name, projectiletype
-                        1, 400, 4, 200, 20, "Fast Tower", ProjectileType.Smallmissile);
+                        25, 400, 1, 200, 20, "Fast Tower", ProjectileType.Smallmissile);
                     sr.SetSprite("Sprites/Towers/Tower_Holder1");
+                    Collider colider = new Collider(sr,Tower) { CheckCollisionEvents = true };
+                    colider.Tag = "Tower";
+                    go.AddComponent(colider);
+                    colider.Colliderscaler = new Vector2(3, 3);
+                    float OffsetcalulationX = sr.Sprite.Width * colider.Colliderscaler.X/2;
+                    float OffsetcalulationY = sr.Sprite.Height * colider.Colliderscaler.Y/2;
+                    colider.Collideroffset = new Vector2(OffsetcalulationX, OffsetcalulationY);
                     break;
                 case TowerType.Slow_Tower:
                     Tower = new Slow_Tower (
                         //damnge, range, firerate, projectilespeed, cost, name, projectiletype
                         2, 400, 2, 200, 20, "Slow Tower", ProjectileType.Bigmissile);
                     sr.SetSprite("Sprites/Towers/Tower_Holder2");
+                    Collider colider02 = new Collider(sr, Tower) {CheckCollisionEvents  = true };
+                    colider02.Tag = "Tower";
+                    go.AddComponent(colider02);
                     break;
                 case TowerType.AOE_Tower:
                     break;

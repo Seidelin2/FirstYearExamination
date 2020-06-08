@@ -84,7 +84,6 @@
     <Compile Include="SQLiteFrameWork\Models\Gold.cs" />
     <Compile Include="SQLite\GoldUpdater.cs" />
     <Compile Include="SQLite\SQLiteDatabase.cs" />
-    <Compile Include="Static Components\TextureHelper.cs" />
     <Compile Include="Tower\Projectile.cs" />
     <Compile Include="Tower\New_Tower.cs" />
     <Compile Include="Tower\ProjectileType.cs" />

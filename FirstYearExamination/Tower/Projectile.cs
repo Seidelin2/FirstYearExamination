@@ -58,6 +58,9 @@ namespace FirstYearExamination.Tower
             else if (Vector2.Distance(target.Transform.Position, GameObject.Transform.Position) <= 5)
             {
                 //TODO : do damage to the unit
+                Unit tmp = (Unit)target.GetComponent("Unit");
+                
+                tmp.TakeDamage(damage);
                 Death();
             }
             else

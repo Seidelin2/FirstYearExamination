@@ -16,7 +16,7 @@ namespace FirstYearExamination.Components
 		public float Rotation { get; set; }
 		public float LayerDepth { get; set; }
 
-		public float Rotation { get; set; }
+		public float rotation { get; set; }
 
 		public SpriteRenderer()
 		{

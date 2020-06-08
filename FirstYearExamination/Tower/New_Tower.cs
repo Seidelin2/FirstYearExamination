@@ -1,5 +1,6 @@
 ﻿using FirstYearExamination.Components;
 using FirstYearExamination.Factory;
+using FirstYearExamination.Observer;
 using FirstYearExamination.Tower;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination
 {
-    public class New_Tower : Component
+    public class New_Tower : Component, IGameListener
     {
         protected int damage;
         protected int range;
@@ -21,6 +22,7 @@ namespace FirstYearExamination
         protected  int cost;
         protected string name;
         protected GameObject target;
+        protected Unit unit;
 
         protected ProjectileType projectiletype;
 
@@ -44,6 +46,7 @@ namespace FirstYearExamination
 
         public override void Awake()
         {
+            GameObject.Tag = "Tower";
             base.Awake();
         }
 
@@ -66,11 +69,22 @@ namespace FirstYearExamination
         public void FindTarget()
         {
             //TODO find target 
+            Target = null;
+            unit = null;
         }
 
         public void TowerFire()
         {
-            if (target == null)
+            //Console.WriteLine(Target);
+            if (unit != null)
+            {
+                if (unit.unitHealth <= 0)
+                {
+                    FindTarget();
+                }
+            }
+
+            if (target == null )
             {
                 FindTarget();
             }
@@ -96,6 +110,15 @@ namespace FirstYearExamination
             currentFireRate = fireRate;
             GameObject go = ProjectileFactory.Instance.Create(projectiletype, target, GameObject.Transform.Position, damage, projectileSpeed);
             GameWorld.Instance.AddGameObject(go);
+        }
+
+        public void Notify(GameEvent gameEvent, Component component)
+        {
+            if (gameEvent.Title == "Collision" && component.GameObject.Tag == "Unit" && target == null)
+            {
+                Target = component.GameObject;
+                unit = (Unit)target.GetComponent("Unit");
+            }
         }
     }
 }
