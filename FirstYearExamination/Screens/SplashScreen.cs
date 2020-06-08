@@ -27,8 +27,8 @@ namespace FirstYearExamination.Screens
         public SplashScreen(GameWorld gameWorld) : base(gameWorld)
         {
             //tmp tower location, to test if the towers would work, these are just 2 tower placements
-            New_Tower tmp1 = nicolaiTest(new Vector2(100, 100));
-            New_Tower tmp2 = nicolaiTest(new Vector2(300, 300));
+            New_Tower tmp1 = nicolaiTest(new Vector2(200, 100));
+            New_Tower tmp2 = nicolaiTest(new Vector2(300, 400));
             tmp1.Target = tmp2.GameObject;
             //tmp2.Target = tmp1.GameObject;
         }
@@ -71,7 +71,6 @@ namespace FirstYearExamination.Screens
         {
             //this is the attack part of the test towers, here the stats of the tower are, and the sprite the tower shoots with
             GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, pos);
-            GameObject go = TowerFactory.Instance.Create(TowerType.Slow_Tower, pos);
             //SpriteRenderer sr = new SpriteRenderer();
             //Fast_Tower tower = new Fast_Tower(1, 500, 1, 40 ,5 , "hello", ProjectileType.Bigmissile);
 
@@ -90,14 +89,14 @@ namespace FirstYearExamination.Screens
             return tmp;
         }
 
-        public void PlaceTower()
-        {
-            //TODO Get cell position 
-            Vector2 cellpostition;
+        //public void PlaceTower()
+        //{
+        //    //TODO Get cell position 
+        //    Vector2 cellpostition;
 
-            GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, cellpostition);
+        //    GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, cellpostition);
 
-            GameWorld.Instance.AddGameObject(go);
-        }
+        //    GameWorld.Instance.AddGameObject(go);
+        //}
     }
 }

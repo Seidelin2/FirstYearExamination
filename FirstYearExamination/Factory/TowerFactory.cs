@@ -47,13 +47,13 @@ namespace FirstYearExamination.Factory
                 case TowerType.Fast_Tower:
                     Tower = new Fast_Tower(
                         //damnge, range, firerate, projectilespeed, cost, name, projectiletype
-                        1, 400, 1, 200, 20, "Fast Tower", ProjectileType.Smallmissile);
+                        1, 400, 4, 200, 20, "Fast Tower", ProjectileType.Smallmissile);
                     sr.SetSprite("Sprites/Towers/Tower_Holder1");
                     break;
                 case TowerType.Slow_Tower:
                     Tower = new Slow_Tower (
                         //damnge, range, firerate, projectilespeed, cost, name, projectiletype
-                        1, 400, 1, 200, 20, "Slow Tower", ProjectileType.Bigmissile);
+                        2, 400, 2, 200, 20, "Slow Tower", ProjectileType.Bigmissile);
                     sr.SetSprite("Sprites/Towers/Tower_Holder2");
                     break;
                 case TowerType.AOE_Tower:
