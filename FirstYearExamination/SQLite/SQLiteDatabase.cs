@@ -14,10 +14,10 @@ namespace FirstYearExamination.SQLite
 	{
 		public void RunSQLite()
 		{
-			Test2();
+			Database();
 		}
 
-		private void Test2()
+		private void Database()
 		{
 			AutoTable<Gold> autoTable = new AutoTable<Gold>();
 			autoTable.MakeTable();
@@ -25,9 +25,6 @@ namespace FirstYearExamination.SQLite
 			Gold_Factory gold_Factory = new Gold_Factory();
 
 			Gold gold = gold_Factory.Get(1);
-
-			Console.WriteLine($"ID: {gold.ID}");
-			Console.WriteLine($"Gold: {gold.Amount}");
 		}
 	}
 }
