@@ -10,7 +10,7 @@ namespace FirstYearExamination.Components
 {
 	public class WaveController
 	{
-		object lockObject;
+		object lockObject = new object();
 		public static Thread t;
 		public int waveIndex = 1;
 		public List<GameObject> wave_Units = new List<GameObject>();
