@@ -12,7 +12,7 @@ namespace FirstYearExamination
 {
     public class Fast_Tower : New_Tower
     {
-        public Fast_Tower(int damage, int range, int fireRate, int projectileSpeed, int cost, string name, ProjectileType projectileType)
+        public Fast_Tower(int damage, int range, float fireRate, int projectileSpeed, int cost, string name, ProjectileType projectileType)
         {
             this.damage = damage;
             this.range = range;

@@ -47,7 +47,7 @@ namespace FirstYearExamination.Factory
                 case TowerType.Fast_Tower:
                     Tower = new Fast_Tower(
                         //damnge, range, firerate, projectilespeed, cost, name, projectiletype
-                        15, 600, 1, 200, 20, "Fast Tower", ProjectileType.Smallmissile);
+                        10, 600, 0.5f, 200, 20, "Fast Tower", ProjectileType.Smallmissile);
                     sr.SetSprite("Sprites/Towers/Tower_Holder1");
                     Collider colider = new Collider(sr,Tower) { CheckCollisionEvents = true };
                     colider.Tag = "Tower";

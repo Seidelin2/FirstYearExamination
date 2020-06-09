@@ -16,10 +16,10 @@ namespace FirstYearExamination
     {
         protected int damage;
         protected int range;
-        protected int fireRate;
+        protected float fireRate;
         protected float currentFireRate;
         protected int projectileSpeed;
-        protected  int cost;
+        protected int cost;
         protected string name;
         protected GameObject target;
         protected Unit unit;
@@ -28,7 +28,7 @@ namespace FirstYearExamination
 
         public GameObject Target { get => target; set => target = value; }
 
-        public New_Tower (int damage, int range, int fireRate, int projectileSpeed, int cost, string name, ProjectileType projectileType)
+        public New_Tower (int damage, int range, float fireRate, int projectileSpeed, int cost, string name, ProjectileType projectileType)
         {
             this.damage = damage;
             this.range = range;
@@ -68,7 +68,6 @@ namespace FirstYearExamination
 
         public void FindTarget()
         {
-            //TODO find target 
             Target = null;
             unit = null;
         }
