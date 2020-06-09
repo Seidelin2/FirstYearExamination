@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D0D77787-C7AD-411C-8BC4-5C30617FF51E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FirstYearExamination</RootNamespace>
     <AssemblyName>FirstYearExamination</AssemblyName>
@@ -61,7 +61,6 @@
     <Compile Include="GUI\GUIManager.cs" />
     <Compile Include="GUI\GUIButtons.cs" />
     <Compile Include="GUI\GUIText.cs" />
-    <Compile Include="GUI\Panel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Levels\Level1_Screen.cs" />
     <Compile Include="Levels\Level2_Screen.cs" />
