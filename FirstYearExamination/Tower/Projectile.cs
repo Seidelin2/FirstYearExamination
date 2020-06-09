@@ -22,7 +22,7 @@ namespace FirstYearExamination.Tower
         {
             this.damage = damage;
             this.projectileSpeed = projectileSpeed;
-            this.name = name;
+            this.name = names;
 
 
         }
@@ -93,7 +93,7 @@ namespace FirstYearExamination.Tower
         private void LookAtTarget()
         {
            float rotation = Helper.CalculateAngleBetweenPositions(GameObject.Transform.Position, target.Transform.Position);
-            sr.Rotation = rotation +90; 
+            sr.Rotation = rotation + 90; 
         }
     }
 }

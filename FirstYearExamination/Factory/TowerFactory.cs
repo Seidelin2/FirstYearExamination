@@ -52,7 +52,7 @@ namespace FirstYearExamination.Factory
                     Collider colider = new Collider(sr,Tower) { CheckCollisionEvents = true };
                     colider.Tag = "Tower";
                     go.AddComponent(colider);
-                    colider.Colliderscaler = new Vector2(3, 3);
+                    colider.Colliderscaler = new Vector2(4, 4);
                     float OffsetcalulationX = sr.Sprite.Width * colider.Colliderscaler.X/2;
                     float OffsetcalulationY = sr.Sprite.Height * colider.Colliderscaler.Y/2;
                     colider.Collideroffset = new Vector2(OffsetcalulationX, OffsetcalulationY);
