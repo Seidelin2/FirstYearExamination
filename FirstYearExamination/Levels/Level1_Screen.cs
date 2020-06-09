@@ -1,5 +1,8 @@
-﻿using FirstYearExamination.Screens;
+﻿using FirstYearExamination.Components;
+using FirstYearExamination.Factory;
+using FirstYearExamination.Screens;
 using FirstYearExamination.SQLite;
+using FirstYearExamination.Tower;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,8 +25,10 @@ namespace FirstYearExamination.Levels
 
 		public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
         {
-
-		}
+            New_Tower tmp1 = nicolaiTest(new Vector2(200, 100));
+            New_Tower tmp2 = nicolaiTest(new Vector2(300, 400));
+            //tmp1.Target = tmp2.GameObject;
+        }
 
 		public override void LoadContent()
         {
@@ -84,5 +89,27 @@ namespace FirstYearExamination.Levels
 
             previousKS = newKS;
         }
-	}
+
+        public New_Tower nicolaiTest(Vector2 pos)
+        {
+            //this is the attack part of the test towers, here the stats of the tower are, and the sprite the tower shoots with
+            GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, pos);
+            //SpriteRenderer sr = new SpriteRenderer();
+            //Fast_Tower tower = new Fast_Tower(1, 500, 1, 40 ,5 , "hello", ProjectileType.Bigmissile);
+
+            //sr.SetSprite("Sprites/Towers/Tower_Holder1");
+            //sr.SetOrigin();
+            //go.Transform.Position = pos;
+
+            //go.AddComponent(sr);
+            //go.AddComponent(tower);
+
+            GameWorld.Instance.AddGameObject(go);
+
+            Fast_Tower tmp = (Fast_Tower)go.GetComponent<Fast_Tower>();
+            SpriteRenderer tmp1 = (SpriteRenderer)go.GetComponent<SpriteRenderer>();
+
+            return tmp;
+        }
+    }
 }
