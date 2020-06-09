@@ -100,6 +100,7 @@ namespace FirstYearExamination.GUI
 
         private void QuitButton_Click(object sender, System.EventArgs e)
         {
+            WaveController.t.Abort();
             gameScreen.gameWorld.Exit();
         }
 
