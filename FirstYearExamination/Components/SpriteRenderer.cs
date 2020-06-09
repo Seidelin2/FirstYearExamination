@@ -13,8 +13,10 @@ namespace FirstYearExamination.Components
 		public Texture2D Sprite { get; set; }
 
 		public Vector2 Origin { get; set; }
-
 		public float Rotation { get; set; }
+		public float LayerDepth { get; set; }
+
+		public float rotation { get; set; }
 
 		public SpriteRenderer()
 		{
@@ -36,9 +38,14 @@ namespace FirstYearExamination.Components
 			Sprite = GameWorld.Instance.Content.Load<Texture2D>(spriteName);
 		}
 
+		public void SetOrigin()
+        {
+			Origin = new Vector2(Sprite.Width / 2, Sprite.Height / 2);
+		}
+
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, Rotation, Origin, 1, SpriteEffects.None, 0.5f);
+			spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, MathHelper.ToRadians(Rotation), Origin, 1, SpriteEffects.None, LayerDepth);
 		}
 
 		public override string ToString()

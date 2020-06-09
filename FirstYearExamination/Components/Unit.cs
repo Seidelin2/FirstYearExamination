@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FirstYearExamination.ObjectPool;
+using FirstYearExamination.Observer;
 using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace FirstYearExamination.Components
 {
-	public class Unit : Component
+	public class Unit : Component, IGameListener
 	{
 		protected float speed;
 		protected Vector2 velocity;
@@ -21,7 +22,7 @@ namespace FirstYearExamination.Components
 		private Vector2 bgHealthOrigin;
 
 		protected int maxHealth = 30;
-		protected int unitHealth = 30;
+		public int unitHealth = 30;
 		protected int goldAmount = 10;
 		protected float healthPercentage { get { return (float)unitHealth / (float)maxHealth; } }
 
@@ -71,6 +72,17 @@ namespace FirstYearExamination.Components
 			}
 		}
 
+		public void TakeDamage (int damage)
+        {
+			unitHealth -= damage;
+			if (unitHealth <= 0)
+            {
+				GameWorld.Instance.RemoveGameObject(GameObject);
+				GameObject.Transform.Position = new Vector2(-100, -100);
+			}
+	    }
+
+
 		public override string ToString()
 		{
 			return "Unit";
@@ -105,5 +117,10 @@ namespace FirstYearExamination.Components
 				UnitPool.Instance.ReleaseObject(GameObject);
 			}
 		}
-	}
+
+        public void Notify(GameEvent gameEvent, Component component)
+        {
+            
+        }
+    }
 }
