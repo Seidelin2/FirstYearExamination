@@ -78,7 +78,7 @@ namespace FirstYearExamination.Components
 			if (unitHealth <= 0)
             {
 				GameWorld.Instance.RemoveGameObject(GameObject);
-				GameObject.Transform.Position = new Vector2(-100, -100);
+				GameObject.Transform.Position = new Vector2(0, 0);
 			}
 	    }
 

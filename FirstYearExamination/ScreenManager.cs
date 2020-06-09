@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using FirstYearExamination.Screens;
+using FirstYearExamination.Levels;
 
 namespace FirstYearExamination
 {
@@ -37,7 +38,7 @@ namespace FirstYearExamination
         /// </summary>
         public static void Initialize(GameWorld gameWorld)
         {
-            CurrentScreen = new SplashScreen(gameWorld);
+            CurrentScreen = new Level1_Screen(gameWorld);
         }
 
         /// <summary>

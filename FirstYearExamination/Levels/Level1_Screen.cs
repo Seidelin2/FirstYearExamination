@@ -25,8 +25,8 @@ namespace FirstYearExamination.Levels
 
 		public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
         {
-            New_Tower tmp1 = nicolaiTest(new Vector2(200, 100));
-            New_Tower tmp2 = nicolaiTest(new Vector2(300, 400));
+            New_Tower tmp1 = nicolaiTest(new Vector2(675, 219));
+            New_Tower tmp2 = nicolaiTest(new Vector2(220, 480));
             //tmp1.Target = tmp2.GameObject;
         }
 

@@ -96,7 +96,7 @@ namespace FirstYearExamination.Components
                 (
                     (int)(GameObject.Transform.Position.X - origin.X - Collideroffset.X),
                     (int)(GameObject.Transform.Position.Y - origin.Y - Collideroffset.Y),
-                    (int)(size.X*Colliderscaler.X),
+                    (int)(size.X * Colliderscaler.X),
                     (int)(size.Y * Colliderscaler.Y)
                 );
             }
