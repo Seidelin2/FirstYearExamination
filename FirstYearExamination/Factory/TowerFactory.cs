@@ -51,7 +51,7 @@ namespace FirstYearExamination.Factory
                     Tower = new Fast_Tower(
                         //damnge, range, firerate, projectilespeed, cost, name, projectiletype
                         10, 600, 0.5f, 200, 20, "Fast Tower", ProjectileType.Smallmissile);
-                    sr.SetSprite("Sprites/Towers/Tower_Holder1");
+                    sr.SetSprite("Sprites/Towers/Tower_Fast");
                     Collider colider = new Collider(sr,Tower) { CheckCollisionEvents = true };
                     colider.Tag = "Tower";
                     go.AddComponent(colider);
@@ -64,7 +64,7 @@ namespace FirstYearExamination.Factory
                     Tower = new Slow_Tower (
                         //damnge, range, firerate, projectilespeed, cost, name, projectiletype
                         30, 600, 2, 200, 20, "Slow Tower", ProjectileType.Bigmissile);
-                    sr.SetSprite("Sprites/Towers/Tower_Holder2");
+                    sr.SetSprite("Sprites/Towers/Tower_Slow");
                     Collider colider02 = new Collider(sr, Tower) {CheckCollisionEvents  = true };
                     colider02.Tag = "Tower";
                     go.AddComponent(colider02);
