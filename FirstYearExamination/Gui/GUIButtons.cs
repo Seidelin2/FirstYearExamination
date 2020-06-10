@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Gui
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin
+	/// </summary>
     class GUIButtons : Component
     {
         #region Fields

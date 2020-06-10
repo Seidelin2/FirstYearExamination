@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Levels
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
     class Level1_Screen : GameScreen
     {
         //Used for HandleInput
@@ -94,15 +97,6 @@ namespace FirstYearExamination.Levels
         {
             //this is the attack part of the test towers, here the stats of the tower are, and the sprite the tower shoots with
             GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, pos);
-            //SpriteRenderer sr = new SpriteRenderer();
-            //Fast_Tower tower = new Fast_Tower(1, 500, 1, 40 ,5 , "hello", ProjectileType.Bigmissile);
-
-            //sr.SetSprite("Sprites/Towers/Tower_Holder1");
-            //sr.SetOrigin();
-            //go.Transform.Position = pos;
-
-            //go.AddComponent(sr);
-            //go.AddComponent(tower);
 
             GameWorld.Instance.AddGameObject(go);
 

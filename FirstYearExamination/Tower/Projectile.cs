@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Tower
 {
+    /// <summary>
+	/// Lavet af Nicolai Toft
+	/// </summary>
     public class Projectile : Component
     {
-
         int damage;
         int projectileSpeed;
         string name;
@@ -23,8 +25,6 @@ namespace FirstYearExamination.Tower
             this.damage = damage;
             this.projectileSpeed = projectileSpeed;
             this.name = names;
-
-
         }
 
         public override void Awake()

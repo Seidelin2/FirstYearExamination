@@ -12,6 +12,9 @@ using FirstYearExamination.Levels;
 
 namespace FirstYearExamination
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin
+	/// </summary>
     static class ScreenManager
     {
         //ContentManager for handling all content in the game.
@@ -38,7 +41,7 @@ namespace FirstYearExamination
         /// </summary>
         public static void Initialize(GameWorld gameWorld)
         {
-            CurrentScreen = new Level1_Screen(gameWorld);
+            CurrentScreen = new SplashScreen(gameWorld);
         }
 
         /// <summary>

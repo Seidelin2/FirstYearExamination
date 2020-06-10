@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.SQLiteFrameWork.Factories
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class Gold_Factory : AutoFactory<Gold>
 	{
 

@@ -1,5 +1,6 @@
 ﻿using FirstYearExamination.Components;
 using FirstYearExamination.Factory;
+using FirstYearExamination.Levels;
 using FirstYearExamination.Tower;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Screens
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin
+	/// </summary>
     class SplashScreen : GameScreen
     {
         private KeyboardState previousKS = Keyboard.GetState();
@@ -19,7 +23,7 @@ namespace FirstYearExamination.Screens
 
         //Variables for handling graphics
         private Texture2D background;
-        private string path = "Sprites/TestPixel";
+        private string path = "Sprites/UI/Splash_Screen_Game";
 
         /// <summary>
         /// Default contructor.
@@ -61,7 +65,7 @@ namespace FirstYearExamination.Screens
 
             if (newKS.GetPressedKeys().Length != 0 && previousKS.GetPressedKeys().Length == 0)
             {
-                ScreenManager.ChangeScreenTo(new TitleScreen(this.gameWorld));
+                ScreenManager.ChangeScreenTo(new Level1_Screen(this.gameWorld));
             }
 
             previousKS = newKS;
@@ -71,15 +75,6 @@ namespace FirstYearExamination.Screens
         {
             //this is the attack part of the test towers, here the stats of the tower are, and the sprite the tower shoots with
             GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, pos);
-            //SpriteRenderer sr = new SpriteRenderer();
-            //Fast_Tower tower = new Fast_Tower(1, 500, 1, 40 ,5 , "hello", ProjectileType.Bigmissile);
-
-            //sr.SetSprite("Sprites/Towers/Tower_Holder1");
-            //sr.SetOrigin();
-            //go.Transform.Position = pos;
-
-            //go.AddComponent(sr);
-            //go.AddComponent(tower);
 
             GameWorld.Instance.AddGameObject(go);
 
@@ -88,15 +83,5 @@ namespace FirstYearExamination.Screens
 
             return tmp;
         }
-
-        //public void PlaceTower()
-        //{
-        //    //TODO Get cell position 
-        //    Vector2 cellpostition;
-
-        //    GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, cellpostition);
-
-        //    GameWorld.Instance.AddGameObject(go);
-        //}
     }
 }

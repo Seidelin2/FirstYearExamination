@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.GUI
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class GUIText : Component
 	{
 		private SpriteFont font;

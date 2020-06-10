@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Tower
 {
+    /// <summary>
+	/// Lavet af Nicolai Toft
+	/// </summary>
     public enum TowerType
     {
         Fast_Tower, Slow_Tower, AOE_Tower, MultiTarget_Tower, Random_Fire,

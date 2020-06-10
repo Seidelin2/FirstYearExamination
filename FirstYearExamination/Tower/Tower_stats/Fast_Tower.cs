@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination
 {
+    /// <summary>
+	/// Lavet af Nicolai Toft
+	/// </summary>
     public class Fast_Tower : New_Tower
     {
         public Fast_Tower(int damage, int range, float fireRate, int projectileSpeed, int cost, string name, ProjectileType projectileType)

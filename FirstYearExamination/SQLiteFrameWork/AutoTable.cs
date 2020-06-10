@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.SQLiteFrameWork
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class AutoTable<T> where T : new ()
 	{
 		private Dictionary<string, string> _mapping { get; set; }

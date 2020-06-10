@@ -10,6 +10,9 @@ using FirstYearExamination.SQLiteFrameWork.Factories;
 
 namespace FirstYearExamination.SQLite
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class SQLiteDatabase
 	{
 		public void RunSQLite()

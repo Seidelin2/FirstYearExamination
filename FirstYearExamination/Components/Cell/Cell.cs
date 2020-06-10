@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Components
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class Cell
 	{
 		private Texture2D cellTexture;

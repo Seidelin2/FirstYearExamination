@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Screens
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin
+	/// </summary>
     class TitleScreen : GameScreen
     {
         //For Testing Purposes
@@ -19,16 +22,11 @@ namespace FirstYearExamination.Screens
 
         //Variables for handling graphics
         private Texture2D background;
-        private string backgroundPath = "Sprites/TestPixel";
+        private string backgroundPath = "Sprites/UI/Slash_Screen_Game";
 
         public TitleScreen(GameWorld gameWorld) : base(gameWorld)
         {
             
-
-            //if (!MenuManager.IsMenuOpen)
-            //{
-            //    MenuManager.OpenMenu("TitleMenu");
-            //}
         }
 
         public override void LoadContent()

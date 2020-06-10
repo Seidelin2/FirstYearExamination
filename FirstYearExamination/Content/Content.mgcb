@@ -284,6 +284,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Towers/Tower_Platform4.png
 
+#begin Sprites/UI/Splash_Screen_Game.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/UI/Splash_Screen_Game.png
+
 #begin Sprites/UI/UI_Quit.png
 /importer:TextureImporter
 /processor:TextureProcessor

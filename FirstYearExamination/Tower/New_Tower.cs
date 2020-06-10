@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination
 {
+    /// <summary>
+	/// Lavet af Nicolai Toft
+	/// </summary>
     public class New_Tower : Component, IGameListener
     {
         protected int damage;

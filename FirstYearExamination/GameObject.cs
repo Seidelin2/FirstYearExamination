@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FirstYearExamination
 {
+	/// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
 	public class GameObject
 	{
 		public Transform Transform { get; private set; }

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Factory
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	class UnitFactory : Factory
 	{
 		#region INSTANCE

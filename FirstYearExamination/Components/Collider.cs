@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Components
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
     public class Collider : Component
     {
         public bool CheckCollisionEvents { get; set; }

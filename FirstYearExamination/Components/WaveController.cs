@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Components
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard og Casper Seidelin
+	/// </summary>
 	public class WaveController
 	{
 		object lockObject = new object();

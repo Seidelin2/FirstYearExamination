@@ -11,7 +11,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FirstYearExamination.Components
 {
-	public class Unit : Component, IGameListener
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
+	public class Unit : Component
 	{
 		protected float speed;
 		protected Vector2 velocity;
@@ -116,10 +119,5 @@ namespace FirstYearExamination.Components
 				UnitPool.Instance.ReleaseObject(GameObject);
 			}
 		}
-
-        public void Notify(GameEvent gameEvent, Component component)
-        {
-            
-        }
     }
 }

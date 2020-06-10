@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Components
 {
+	/// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
 	public class SpriteRenderer : Component
 	{
 		public Texture2D Sprite { get; set; }

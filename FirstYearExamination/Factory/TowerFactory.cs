@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Factory
 {
+    /// <summary>
+	/// Lavet af Nicolai Toft
+	/// </summary>
     public class TowerFactory : Factory
     {
         #region INSTANCE

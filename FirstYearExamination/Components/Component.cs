@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Components
 {
+	/// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
 	public abstract class Component
 	{
 		public bool IsEnabled { get; set; } = true;

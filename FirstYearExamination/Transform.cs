@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination
 {
+	/// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
 	public class Transform
 	{
 		public Vector2 Position { get; set; }
