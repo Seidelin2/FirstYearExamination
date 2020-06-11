@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.GUI
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin
+	/// </summary>
     public class GUIManager 
     {
         private List<Component> _gameComponents;               
@@ -45,7 +48,7 @@ namespace FirstYearExamination.GUI
 		{
 			var waveButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Tower"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts /Font"))
 			{
-				Position = new Vector2(935, 176),
+				Position = new Vector2(935, 96),
 				Text = "Next Wave",
 			};
 
@@ -61,7 +64,7 @@ namespace FirstYearExamination.GUI
 
             var quitButton = new GUIButtons(gameScreen.gameScreenContent.Load<Texture2D>("Sprites/UI/UI_Quit"), gameScreen.gameScreenContent.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(935, 256),
+                Position = new Vector2(935, 176),
                 Text = "Quit",
             };
 
@@ -75,7 +78,6 @@ namespace FirstYearExamination.GUI
 
             _gameComponents = new List<Component>()
             {
-                randomButton,
                 quitButton,
 				waveButton,
 				GoldText,
@@ -100,6 +102,7 @@ namespace FirstYearExamination.GUI
 
         private void QuitButton_Click(object sender, System.EventArgs e)
         {
+            WaveController.t.Abort();
             gameScreen.gameWorld.Exit();
         }
 

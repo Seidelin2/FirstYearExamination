@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.SQLiteFrameWork.Models
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class Gold
 	{
 		public Int32 ID { get; set; }

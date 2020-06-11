@@ -7,6 +7,9 @@ using System.Data.SQLite;
 
 namespace FirstYearExamination.SQLiteFrameWork
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class AutoFactory<T> where T : new ()
 	{
 		private string table;

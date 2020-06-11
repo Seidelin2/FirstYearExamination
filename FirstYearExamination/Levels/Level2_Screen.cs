@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Levels
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
     class Level2_Screen : GameScreen
     {
         //Used for HandleInput

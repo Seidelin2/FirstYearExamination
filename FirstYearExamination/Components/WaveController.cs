@@ -3,22 +3,40 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FirstYearExamination.Components
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard og Casper Seidelin
+	/// </summary>
 	public class WaveController
 	{
+		object lockObject = new object();
+		public static Thread t;
 		public int waveIndex = 1;
 		public List<GameObject> wave_Units = new List<GameObject>();
 
 		public void NextWave()
 		{
-			for (int i = 0; i < waveIndex * 10; i++)
+			t = new Thread(NewWave);
+			t.Start();
+			Console.WriteLine("Is main Thread is alive " + "? : {0}", t.IsAlive);
+			
+		}
+
+		private void NewWave()
+		{
+			lock (lockObject)
 			{
-				GameObject go = UnitPool.Instance.GetObject();
-				wave_Units.Add(go);
+				for (int i = 0; i < waveIndex * 10; i++)
+				{
+					GameObject go = UnitPool.Instance.GetObject();
+					wave_Units.Add(go);
+				}
 			}
+			
 			waveIndex++;
 		}
 

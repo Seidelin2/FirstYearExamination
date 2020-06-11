@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FirstYearExamination.ObjectPool;
+using FirstYearExamination.Observer;
 using FirstYearExamination.SQLite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace FirstYearExamination.Components
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class Unit : Component
 	{
 		protected float speed;
@@ -21,7 +25,7 @@ namespace FirstYearExamination.Components
 		private Vector2 bgHealthOrigin;
 
 		protected int maxHealth = 30;
-		protected int unitHealth = 30;
+		public int unitHealth = 30;
 		protected int goldAmount = 10;
 		protected float healthPercentage { get { return (float)unitHealth / (float)maxHealth; } }
 
@@ -71,6 +75,16 @@ namespace FirstYearExamination.Components
 			}
 		}
 
+		public void TakeDamage (int damage)
+        {
+			unitHealth -= damage;
+			if (unitHealth <= 0)
+            {
+				GameObject.Transform.Position = new Vector2(-64, 0);
+			}
+	    }
+
+
 		public override string ToString()
 		{
 			return "Unit";
@@ -105,5 +119,5 @@ namespace FirstYearExamination.Components
 				UnitPool.Instance.ReleaseObject(GameObject);
 			}
 		}
-	}
+    }
 }

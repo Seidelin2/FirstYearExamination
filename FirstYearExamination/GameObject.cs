@@ -9,11 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FirstYearExamination
 {
+	/// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
 	public class GameObject
 	{
 		public Transform Transform { get; private set; }
 
-		private Dictionary<string, Component> components = new Dictionary<string, Component>();
+		public Dictionary<string, Component> components = new Dictionary<string, Component>();
 
 		public string Tag { get; set; }
 
@@ -30,7 +33,34 @@ namespace FirstYearExamination
 
 		public Component GetComponent(string component)
 		{
-			return components[component];
+			if (components.Keys.Contains(component))
+            {
+				return components[component];
+            }
+			else
+            {
+				return null;
+            }
+		}
+
+		public Component GetComponent <T> ()
+		{
+            foreach (Component item in components.Values)
+            {
+				if (item is T)
+                {
+					return (item);
+                }
+            }
+			return null;
+			//if (components.Values.Contains(component))
+			//{
+			//	return components[component];
+			//}
+			//else
+			//{
+			//	return null;
+			//}
 		}
 
 		public void Awake()

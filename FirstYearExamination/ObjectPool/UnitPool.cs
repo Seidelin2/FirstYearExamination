@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.ObjectPool
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class UnitPool : ObjectPool
 	{
 		#region INSTANCE

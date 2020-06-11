@@ -53,13 +53,14 @@
     <Compile Include="Components\Unit.cs" />
     <Compile Include="Components\WaveController.cs" />
     <Compile Include="Factory\Factory.cs" />
+    <Compile Include="Factory\ProjectileFactory.cs" />
+    <Compile Include="Factory\TowerFactory.cs" />
     <Compile Include="Factory\UnitFactory.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="GUI\GUIManager.cs" />
     <Compile Include="GUI\GUIButtons.cs" />
     <Compile Include="GUI\GUIText.cs" />
-    <Compile Include="GUI\Panel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Levels\Level1_Screen.cs" />
     <Compile Include="Levels\Level2_Screen.cs" />
@@ -82,6 +83,12 @@
     <Compile Include="SQLiteFrameWork\Models\Gold.cs" />
     <Compile Include="SQLite\GoldUpdater.cs" />
     <Compile Include="SQLite\SQLiteDatabase.cs" />
+    <Compile Include="Tower\Projectile.cs" />
+    <Compile Include="Tower\New_Tower.cs" />
+    <Compile Include="Tower\ProjectileType.cs" />
+    <Compile Include="Tower\TowerType.cs" />
+    <Compile Include="Tower\Tower_stats\Fast_Tower.cs" />
+    <Compile Include="Tower\Tower_stats\Slow_Tower.cs" />
     <Compile Include="Transform.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +111,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

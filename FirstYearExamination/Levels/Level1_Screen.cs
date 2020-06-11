@@ -1,5 +1,8 @@
-﻿using FirstYearExamination.Screens;
+﻿using FirstYearExamination.Components;
+using FirstYearExamination.Factory;
+using FirstYearExamination.Screens;
 using FirstYearExamination.SQLite;
+using FirstYearExamination.Tower;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Levels
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
     class Level1_Screen : GameScreen
     {
         //Used for HandleInput
@@ -22,8 +28,10 @@ namespace FirstYearExamination.Levels
 
 		public Level1_Screen(GameWorld gameWorld) : base(gameWorld)
         {
-
-		}
+            New_Tower tmp1 = nicolaiTest(new Vector2(672, 224));
+            New_Tower tmp2 = nicolaiTest(new Vector2(224, 480));
+            //tmp1.Target = tmp2.GameObject;
+        }
 
 		public override void LoadContent()
         {
@@ -84,5 +92,18 @@ namespace FirstYearExamination.Levels
 
             previousKS = newKS;
         }
-	}
+
+        public New_Tower nicolaiTest(Vector2 pos)
+        {
+            //this is the attack part of the test towers, here the stats of the tower are, and the sprite the tower shoots with
+            GameObject go = TowerFactory.Instance.Create(TowerType.Fast_Tower, pos);
+
+            GameWorld.Instance.AddGameObject(go);
+
+            Fast_Tower tmp = (Fast_Tower)go.GetComponent<Fast_Tower>();
+            SpriteRenderer tmp1 = (SpriteRenderer)go.GetComponent<SpriteRenderer>();
+
+            return tmp;
+        }
+    }
 }

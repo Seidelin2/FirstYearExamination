@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.SQLiteFrameWork
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class Mapper<T> where T : new()
 	{
 		private Dictionary<string, string> _mappings { get; set; }

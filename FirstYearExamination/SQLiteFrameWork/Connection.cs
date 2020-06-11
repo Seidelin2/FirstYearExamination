@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.SQLiteFrameWork
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public static class Connection
 	{
 		public static SQLiteConnection GetConnection()

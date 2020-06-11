@@ -8,9 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using FirstYearExamination.Screens;
+using FirstYearExamination.Levels;
 
 namespace FirstYearExamination
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin
+	/// </summary>
     static class ScreenManager
     {
         //ContentManager for handling all content in the game.

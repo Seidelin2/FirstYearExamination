@@ -153,6 +153,8 @@ namespace FirstYearExamination
 					tmpColliders[i].OnCollisionEnter(tmpColliders[j]);
 				}
 			}
+
+			Console.WriteLine(tmpColliders.Length);
         }
 
         /// <summary>

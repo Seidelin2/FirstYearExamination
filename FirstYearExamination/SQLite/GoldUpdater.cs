@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.SQLite
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	public class GoldUpdater
 	{
 		GUIText guiText;

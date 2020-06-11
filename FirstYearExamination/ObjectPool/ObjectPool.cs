@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.ObjectPool
 {
+	/// <summary>
+	/// Lavet af Casper Seidelin, Nicolai Toft og Marius Rysgaard
+	/// </summary>
 	public abstract class ObjectPool
 	{
 		protected List<GameObject> active = new List<GameObject>();

@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Screens
 {
+    /// <summary>
+	/// Lavet af Casper Seidelin
+	/// </summary>
     public abstract class GameScreen
     {
 		private bool startOnce = true;

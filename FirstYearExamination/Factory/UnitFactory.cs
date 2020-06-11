@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FirstYearExamination.Factory
 {
+	/// <summary>
+	/// Lavet af Marius Rysgaard
+	/// </summary>
 	class UnitFactory : Factory
 	{
 		#region INSTANCE
@@ -32,16 +35,21 @@ namespace FirstYearExamination.Factory
 			SpriteRenderer sr = new SpriteRenderer();
 			go.AddComponent(sr);
 
+
 			switch (type)
 			{
 				case "SoldierA":
 					sr.SetSprite("Sprites/Unit/Unit_SoldierA");
-					go.AddComponent(new Collider(sr));
+					Collider colider = new Collider(sr);
+					colider.Tag = "Enemy";
+					go.AddComponent(colider);
 					go.AddComponent(new Unit(100));
 					break;
 				case "SoldierB":
 					sr.SetSprite("Sprites/Unit/Unit_SoldierB");
-					go.AddComponent(new Collider(sr));
+					Collider colider02 = new Collider(sr);
+					colider02.Tag = "Enemy";
+					go.AddComponent(colider02);
 					go.AddComponent(new Unit(150));
 					break;
 			}
